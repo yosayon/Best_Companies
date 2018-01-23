@@ -23,10 +23,16 @@ class Scraper
   end
 
 
-  def self.review_links(review)
-   doc = Nokogiri::HTML(open(review_link))
-   #find a way to scrape the review links and put it into a hash
-  
+  def self.review_links
+   ratings = Hash.new
+   link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
+   doc = Nokogiri::HTML(open(link))
+   great_challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
+   great_atmosphere = doc.css(".employee_rating_chart .full_progress span")[1].text
+   ratings[:great_challenges] = great_challenges
+   ratings[:great_atmosphere] = great_atmosphere
+   #add the rest of the ratings
+
   binding.pry
   end
 
