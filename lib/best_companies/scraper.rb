@@ -23,7 +23,7 @@ class Scraper
   end
 
 
-  def self.review_links
+  def self.scrape_ratings
    ratings = Hash.new
    link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
    doc = Nokogiri::HTML(open(link))
@@ -39,12 +39,17 @@ class Scraper
    ratings[:great_pride] = great_pride
    ratings[:great_communication] = great_communication
    ratings[:great_bosses] = great_bosses
-   #add the rest of the ratings
-
-  binding.pry
+  end
+  
+  def self.scrape_awards
+   # awards = Hash.new
+    link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
+    doc = Nokogiri::HTML(open(link))
+    awards = doc.css(".awards span.award_list p").text.gsub("\n","").gsub("\t","").gsub(" ","")
+    binding.pry
   end
 
 
 end
 
-Scraper.review_links
+Scraper.scrape_awards
