@@ -45,7 +45,13 @@ class Scraper
    # awards = Hash.new
     link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
     doc = Nokogiri::HTML(open(link))
-    awards = doc.css(".awards span.award_list p").text.gsub("\n","").gsub("\t","").gsub(" ","")
+    awards = doc.css(".awards span.award_list")
+    
+    final_awards = awards.children.css("p").map do |award|
+        award.text.gsub("\n","").gsub("\t","").gsub(" ","")
+    end
+    #figure out how to separate the awards into it's own hash.
+    final_awards = final_awards.slice(0,6)
     binding.pry
   end
 
