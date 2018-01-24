@@ -52,6 +52,7 @@ class Scraper
     end
     #figure out how to separate the awards into it's own hash.
     final_awards = final_awards.slice(0,6)
+    #figure out if all companies have a minimum of 6 awards
     binding.pry
   end
 
