@@ -8,9 +8,10 @@ class BestCompanies::CLI
   BestCompanies::Company.see_list
   self.add_ratings
   puts "you successfully added ratings!"
-  BestCompanies::Company.see_entire_list
+  self.add_awards
+  puts "you've successfully added awards!"
+  binding.pry
   
-
  end
  
  def self.create_list
@@ -29,6 +30,7 @@ class BestCompanies::CLI
  end
  
  def self.add_awards
+  puts "adding awards.....this may take a moment"
   BestCompanies::Company.all.each do |company|
    if company.review_url != "No Review Available"
     awards = BestCompanies::Scraper.scrape_awards(company.review_url)

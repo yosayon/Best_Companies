@@ -36,15 +36,15 @@ class BestCompanies::Scraper
    ratings
   end
   
-  def scrape_awards(url)
-    awards = Hash.new
+  def self.scrape_awards(url)
+    awards = Array.new
     doc = Nokogiri::HTML(open(url))
     awards = doc.css(".awards span.award_list")
     final_awards = awards.children.css("p").map do |award|
     award.text.gsub("\n","").gsub("\t","").gsub(" ","")
     end
     final_awards = final_awards.slice(0,6)
+    final_awards
   end
 
 end
-

@@ -40,7 +40,7 @@ class BestCompanies::Company
     end
   
     def add_awards(awards_array)
-     self.send("#{awards}=",awards_array)
+     self.send("awards=",awards_array)
     end
     
     
