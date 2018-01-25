@@ -1,0 +1,3 @@
+class BestCompanies::CLI
+    
+end
