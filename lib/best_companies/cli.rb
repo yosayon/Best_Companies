@@ -19,6 +19,7 @@ class BestCompanies::CLI
  end
  
  def self.add_ratings
+  puts "adding ratings.....this may take a moment"
   BestCompanies::Company.all.each do |company|
    if company.review_url != "No Review Available"
     ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)

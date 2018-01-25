@@ -17,11 +17,22 @@ class BestCompanies::Company
     
     def self.see_list
         list = self.all.collect{|company|company.name}
-        list.each{|company| puts "#{company}"}
+        list.each{|company|puts "#{company}"}
     end
     
     def self.see_entire_list
-        self.all.each{|company| puts "#{company}"}
+        all.each do |company|
+            puts "Name: #{company.name}"
+            puts "Industry: #{company.industry}"
+            puts "Location: #{company.location}"
+            puts "Review_URL: #{company.review_url}"
+            puts "Challenges: #{company.challenges}"
+            puts "Atmosphere: #{company.atmosphere}"
+            puts "Rewards: #{company.rewards}"
+            puts "Pride: #{company.pride}"
+            puts "Communication: #{company.communication}"
+            puts "Bosses: #{company.bosses}"
+        end
     end
    
     def add_ratings(ratings_hash)
