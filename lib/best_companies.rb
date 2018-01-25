@@ -8,3 +8,4 @@ module BestCompanies
 end
 
 puts "loading your environment..."
+BestCompanies::CLI.start
