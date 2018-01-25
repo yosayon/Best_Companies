@@ -21,31 +21,29 @@ class BestCompanies::Scraper
   def scrape_ratings(url)
    ratings = Hash.new
    doc = Nokogiri::HTML(open(url))
-   great_challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
-   great_atmosphere = doc.css(".employee_rating_chart .full_progress span")[1].text
-   great_rewards = doc.css(".employee_rating_chart .full_progress span")[2].text
-   great_pride = doc.css(".employee_rating_chart .full_progress span")[3].text
-   great_communication = doc.css(".employee_rating_chart .full_progress span")[4].text
-   great_bosses = doc.css(".employee_rating_chart .full_progress span")[5].text
-   ratings[:great_challenges] = great_challenges
-   ratings[:great_atmosphere] = great_atmosphere
-   ratings[:great_rewards] = great_rewards
-   ratings[:great_pride] = great_pride
-   ratings[:great_communication] = great_communication
-   ratings[:great_bosses] = great_bosses
+   challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
+   atmosphere = doc.css(".employee_rating_chart .full_progress span")[1].text
+   rewards = doc.css(".employee_rating_chart .full_progress span")[2].text
+   pride = doc.css(".employee_rating_chart .full_progress span")[3].text
+   communication = doc.css(".employee_rating_chart .full_progress span")[4].text
+   bosses = doc.css(".employee_rating_chart .full_progress span")[5].text
+   ratings[:challenges] = challenges
+   ratings[:atmosphere] = atmosphere
+   ratings[:rewards] = rewards
+   ratings[:pride] = pride
+   ratings[:communication] = communication
+   ratings[:bosses] = bosses
   end
   
   def scrape_awards(url)
     awards = Hash.new
-    doc = Nokogiri::HTML(open(review_link))
+    doc = Nokogiri::HTML(open(url))
     awards = doc.css(".awards span.award_list")
     final_awards = awards.children.css("p").map do |award|
         award.text.gsub("\n","").gsub("\t","").gsub(" ","")
     end
     final_awards = final_awards.slice(0,6)
   end
-  
-  def create_companies
-  end
+
 end
 
