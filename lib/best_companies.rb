@@ -7,5 +7,10 @@ module BestCompanies
   # Your code goes here...
 end
 
+require_relative '../lib/best_companies/cli'
+require_relative '../lib/best_companies/company'
+require_relative '../lib/best_companies/scraper'
+
+
+
 puts "loading your environment..."
-BestCompanies::CLI.start

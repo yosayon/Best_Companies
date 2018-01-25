@@ -11,7 +11,7 @@ class BestCompanies::Scraper
         :name => name,
         :industry => industry,
         :location => location,
-        :review_url => review_url == [] ? "No Review Available" : review.join("")
+        :review_url => review_url == [] ? "No Review Available" : review_url.join("")
         }
       end
     companies
@@ -33,6 +33,7 @@ class BestCompanies::Scraper
    ratings[:pride] = pride
    ratings[:communication] = communication
    ratings[:bosses] = bosses
+   ratings
   end
   
   def scrape_awards(url)

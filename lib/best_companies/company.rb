@@ -11,8 +11,8 @@ class BestCompanies::Company
      @@all
     end
         
-    def self.create_from_list(company_array)
-     company_array.each{|company|self.new(company)}
+    def self.create_from_list(company_hash)
+     company_hash.each{|company|self.new(company)}
     end
    
     def add_ratings(ratings_hash)
