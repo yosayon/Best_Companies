@@ -1,10 +1,5 @@
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
-
-class Scraper
-
-  def self.scrape_companies
+class BestCompanies::Scraper
+  def scrape_companies
     companies = Array.new
     doc = Nokogiri::HTML(open("https://www.greatplacetowork.com/best-workplaces/100-best/2017"))
     doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
@@ -23,10 +18,9 @@ class Scraper
   end
 
 
-  def self.scrape_ratings
+  def scrape_ratings(review_link)
    ratings = Hash.new
-   link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
-   doc = Nokogiri::HTML(open(link))
+   doc = Nokogiri::HTML(open(review_link))
    great_challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
    great_atmosphere = doc.css(".employee_rating_chart .full_progress span")[1].text
    great_rewards = doc.css(".employee_rating_chart .full_progress span")[2].text
@@ -41,22 +35,17 @@ class Scraper
    ratings[:great_bosses] = great_bosses
   end
   
-  def self.scrape_awards
-   # awards = Hash.new
-    link = "http://reviews.greatplacetowork.com/wegmans-food-markets-inc"
-    doc = Nokogiri::HTML(open(link))
+  def scrape_awards(review_link)
+    awards = Hash.new
+    doc = Nokogiri::HTML(open(review_link))
     awards = doc.css(".awards span.award_list")
-    
     final_awards = awards.children.css("p").map do |award|
         award.text.gsub("\n","").gsub("\t","").gsub(" ","")
     end
-    #figure out how to separate the awards into it's own hash.
     final_awards = final_awards.slice(0,6)
-    #figure out if all companies have a minimum of 6 awards
-    binding.pry
   end
-
-
+  
+  def create_companies
+  end
 end
 
-Scraper.scrape_awards
