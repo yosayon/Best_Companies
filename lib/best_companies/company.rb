@@ -1,0 +1,3 @@
+class BestCompanies::Restaurant
+    
+end
