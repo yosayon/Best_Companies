@@ -3,11 +3,26 @@ class BestCompanies::CLI
     
  def self.start
   create_list
+  add_ratings
+  add_awards
   
  end
  
  def self.create_list
-  company_hash = BestCompanies::Scraper.new.scrape_companies(BASE_PATH)
+  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH)
   BestCompanies::Company.create_from_list(company_hash)
  end
+ 
+ def self.add_ratings
+  BestCompanies::Company.all.each do |company|
+   ratings = BestCompanies::Scraper.scrape.ratings(company.review_url)
+   company.add_ratings(ratings)
+ end
+ 
+ def self.add_awards
+  BestCompanies::Company.all.each do |company|
+   awards = BestCompanies::Scraper.scrape_awards(company.review_url)
+   company.add_awards(awards)
+ end
+ 
 end
