@@ -1,5 +1,5 @@
 class BestCompanies::Scraper
-  def scrape_companies(url)
+  def self.scrape_companies(url)
     companies = Array.new
     doc = Nokogiri::HTML(open(url))
     doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
@@ -18,7 +18,7 @@ class BestCompanies::Scraper
   end
 
 
-  def scrape_ratings(url)
+  def self.scrape_ratings(url)
    ratings = Hash.new
    doc = Nokogiri::HTML(open(url))
    challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
@@ -40,7 +40,7 @@ class BestCompanies::Scraper
     doc = Nokogiri::HTML(open(url))
     awards = doc.css(".awards span.award_list")
     final_awards = awards.children.css("p").map do |award|
-        award.text.gsub("\n","").gsub("\t","").gsub(" ","")
+    award.text.gsub("\n","").gsub("\t","").gsub(" ","")
     end
     final_awards = final_awards.slice(0,6)
   end
