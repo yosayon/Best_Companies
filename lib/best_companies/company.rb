@@ -8,7 +8,7 @@ class BestCompanies::Company
     end
     
     def self.all
-        @@all
+     @@all
     end
         
     def self.create_from_list(company_array)
@@ -19,8 +19,8 @@ class BestCompanies::Company
      ratings_hash.each{|key,value|self.send("#{key}=",value)}
     end
   
-    def add_awards(awards_hash)
-     awards_hash.each{|key,value|self.send("#{key}=",value)}
+    def add_awards(awards_array)
+     self.send("#{awards}=",awards_array)
     end
     
     
