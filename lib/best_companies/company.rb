@@ -11,13 +11,13 @@ class BestCompanies::Company
     company_array.each{|company|self.new(company)}
    end
    
-   def add_ratings(ratings_hash)
+    def add_ratings(ratings_hash)
     ratings_hash.each{|key,value|self.send("#{key}=",value)}
-  end
+   end
   
-  def add_awards(awards_hash)
+   def add_awards(awards_hash)
     awards_hash.each{|key,value|self.send("#{key}=",value)}
-  end
+   end
     
     
 end
