@@ -6,21 +6,21 @@ class BestCompanies::Scraper
       name = company.css(".thumb-text h2").text
       industry = company.css(".thumb-text h5")[0].text
       location = company.css(".thumb-text h5")[1].text
-      review_link = company.css(".thumb-img a").map{|link|link.attribute("href").value}
+      review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
       companies << {
         :name => name,
         :industry => industry,
         :location => location,
-        :review_link => review_link == [] ? "No Review Available" : review.join("")
+        :review_url => review_url == [] ? "No Review Available" : review.join("")
         }
       end
     companies
   end
 
 
-  def scrape_ratings(review_link)
+  def scrape_ratings(url)
    ratings = Hash.new
-   doc = Nokogiri::HTML(open(review_link))
+   doc = Nokogiri::HTML(open(url))
    great_challenges = doc.css(".employee_rating_chart .full_progress span")[0].text
    great_atmosphere = doc.css(".employee_rating_chart .full_progress span")[1].text
    great_rewards = doc.css(".employee_rating_chart .full_progress span")[2].text
@@ -35,7 +35,7 @@ class BestCompanies::Scraper
    ratings[:great_bosses] = great_bosses
   end
   
-  def scrape_awards(review_link)
+  def scrape_awards(url)
     awards = Hash.new
     doc = Nokogiri::HTML(open(review_link))
     awards = doc.css(".awards span.award_list")
