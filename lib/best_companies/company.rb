@@ -14,6 +14,15 @@ class BestCompanies::Company
     def self.create_from_list(company_hash)
      company_hash.each{|company|self.new(company)}
     end
+    
+    def self.see_list
+        list = self.all.collect{|company|company.name}
+        list.each{|company| puts "#{company}"}
+    end
+    
+    def self.see_entire_list
+        self.all.each{|company| puts "#{company}"}
+    end
    
     def add_ratings(ratings_hash)
      ratings_hash.each{|key,value|self.send("#{key}=",value)}

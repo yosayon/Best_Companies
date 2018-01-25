@@ -1,4 +1,4 @@
-require "best_companies/version"
+#require "best_companies/version"
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
@@ -14,3 +14,5 @@ require_relative '../lib/best_companies/scraper'
 
 
 puts "loading your environment..."
+
+BestCompanies::CLI.start
