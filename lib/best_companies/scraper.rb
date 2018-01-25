@@ -1,7 +1,7 @@
 class BestCompanies::Scraper
-  def scrape_companies
+  def scrape_companies(url)
     companies = Array.new
-    doc = Nokogiri::HTML(open("https://www.greatplacetowork.com/best-workplaces/100-best/2017"))
+    doc = Nokogiri::HTML(open(url))
     doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
       name = company.css(".thumb-text h2").text
       industry = company.css(".thumb-text h5")[0].text
