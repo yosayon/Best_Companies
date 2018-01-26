@@ -8,11 +8,11 @@ module BestCompanies
 end
 
 require_relative '../lib/best_companies/cli'
+require_relative '../lib/best_companies/location'
 require_relative '../lib/best_companies/company'
 require_relative '../lib/best_companies/scraper'
 
 
 
-puts "loading your environment..."
 
-BestCompanies::CLI.start
+puts "loading your environment..."
