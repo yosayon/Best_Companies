@@ -5,6 +5,11 @@ class BestCompanies::Location
  def initialize(state)
   @state = state
   @@all << self
+  @companies = []
+ end
+ 
+ def add_company(company)
+  @company << self
  end
  
  def self.all
