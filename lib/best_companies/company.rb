@@ -3,8 +3,9 @@ class BestCompanies::Company
     @@all =[]
     
     def initialize(company_hash)
-     company_hash.each{|key,value|self.send("#{key}=", value)}
+     company_hash.each{|key,value| self.send("#{key}=", value)}
      @@all << self
+     BestCompanies::Location.new(self.location.split(", ")[1]) unless BestCompanies::Location.all.include?(self.location)
     end
     
     def self.all
