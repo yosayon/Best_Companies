@@ -3,10 +3,9 @@ class BestCompanies::Company
     @@all =[]
     
     def initialize(company_hash)
-     company_hash.each do |key,value|
-      self.send("#{key}=", value) unless key == "name"
-    end
-       @@all << self
+     company_hash.each{|key,value|self.send("#{key}=", value)}
+      @@all << self
+      self.industry = BestCompanies::Industry.find_or_create_by_name(industry)
     end
     
     def self.all
