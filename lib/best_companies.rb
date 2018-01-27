@@ -8,8 +8,7 @@ module BestCompanies
 end
 
 require_relative '../lib/best_companies/cli'
-require_relative '../lib/best_companies/company_name'
-require_relative '../lib/best_companies/location'
+require_relative '../lib/best_companies/industry'
 require_relative '../lib/best_companies/company'
 require_relative '../lib/best_companies/scraper'
 
