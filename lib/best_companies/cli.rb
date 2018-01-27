@@ -1,8 +1,22 @@
+#Create a Company Class - done
+#Create a Scraper Class - done
+#Create a CLI - done
+#Create an Industry Class - done
+#As you create company instances, create industry instances and save that instance with the company instance - done
+#Be able to show all unique company instances - done
+#Be able to show all unique industry instances - done
+#A location can have many companies but a company can have only one location - just a note
+#Be able to add a company instances to industry instance variable companies. ---next to do
+
+
+
+
 class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
     
  def self.start
   create_list
+  puts "You added industries"
   input = ""
    puts "To see the top 5 Best Companies please type 1-5"
    puts "To see the top 10 Best Companies please type 1-10"
