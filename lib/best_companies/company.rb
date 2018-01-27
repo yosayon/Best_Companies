@@ -3,10 +3,20 @@ class BestCompanies::Company
     @@all =[]
     
     def initialize(company_hash)
-     company_hash.each{|key,value| self.send("#{key}=", value)}
-     @@all << self
-     BestCompanies::Location.new(self.location.split(", ")[1]) unless BestCompanies::Location.all.include?(self.location)
+     company_hash.each do |key,value|
+      if self.location
+       self.location = BestCompanies::Location.new(location)
+       puts "#{self.location}"
+       self.location = location if self.location
+      else
+       self.send("#{key}=", value)
+       @@all << self
+      end
+     end
     end
+    
+    def location=(location)
+     @location = location
     
     def self.all
      @@all

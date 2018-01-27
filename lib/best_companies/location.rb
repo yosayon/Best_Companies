@@ -1,15 +1,15 @@
 class BestCompanies::Location
- attr_accessor :state
+ attr_accessor :location, :company
  @@all =[]
     
- def initialize(state)
-  @state = state
+ def initialize(location)
+  @location = location
   @@all << self
   @companies = []
  end
  
  def add_company(company)
-  @company << self
+ self.companies << company unless companies.include?(company)
  end
  
  def self.all
