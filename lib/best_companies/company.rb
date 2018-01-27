@@ -1,22 +1,13 @@
 class BestCompanies::Company
-    attr_accessor :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
+    attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
     @@all =[]
     
     def initialize(company_hash)
      company_hash.each do |key,value|
-      if self.location
-       self.location = BestCompanies::Location.new(location)
-       puts "#{self.location}"
-       self.location = location if self.location
-      else
-       self.send("#{key}=", value)
-       @@all << self
-      end
-     end
+      self.send("#{key}=", value) unless key == "name"
     end
-    
-    def location=(location)
-     @location = location
+       @@all << self
+    end
     
     def self.all
      @@all
@@ -33,6 +24,7 @@ class BestCompanies::Company
     
     def self.see_entire_list
         all.each do |company|
+            puts "Rank: #{company.rank}"
             puts "Name: #{company.name}"
             puts "Industry: #{company.industry}"
             puts "Location: #{company.location}"

@@ -3,11 +3,13 @@ class BestCompanies::Scraper
     companies = Array.new
     doc = Nokogiri::HTML(open(url))
     doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
-      name = company.css(".thumb-text h2").text
+      name = company.css(".thumb-text h2").text.split(". ")[1]
+      rank = company.css(".thumb-text h2").text.split(". ")[0]
       industry = company.css(".thumb-text h5")[0].text
       location = company.css(".thumb-text h5")[1].text
       review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
       companies << {
+        :rank => rank,
         :name => name,
         :industry => industry,
         :location => location,

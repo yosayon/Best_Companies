@@ -41,6 +41,7 @@ class BestCompanies::CLI
  
  def self.see_list(num1, num2)
   BestCompanies::Company.all.slice(num1..num2).each do |company|
+   puts "Rank: #{company.rank}"
    puts "Name: #{company.name}"
    puts "Industry: #{company.industry}"
    puts "Location: #{company.location}"
