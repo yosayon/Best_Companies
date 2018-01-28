@@ -5,7 +5,6 @@ class BestCompanies::Industry
   
   def initialize(name)
    @name = name
-   @companies = []
    end
    
   def self.create(name)
@@ -31,4 +30,5 @@ class BestCompanies::Industry
   def self.list_all_industries
   self.all.each{|industry| puts "Industry: #{industry.name}"}
   end
+  
 end
