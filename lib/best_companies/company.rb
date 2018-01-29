@@ -5,7 +5,7 @@ class BestCompanies::Company
     def initialize(company_hash)
      company_hash.each{|key,value|self.send("#{key}=", value)}
       @@all << self
-      self.industry = BestCompanies::Industry.find_or_create_by_name(industry)
+      BestCompanies::Industry.find_or_create_by_name(industry).add_company(self)
     end
     
     def self.all
