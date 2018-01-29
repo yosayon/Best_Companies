@@ -12,6 +12,8 @@ require_relative '../lib/best_companies/industry'
 require_relative '../lib/best_companies/company'
 require_relative '../lib/best_companies/scraper'
 
+BestCompanies::CLI.create_list
+
 
 
 
