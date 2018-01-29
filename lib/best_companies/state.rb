@@ -1,6 +1,6 @@
-class BestCompanies::Location
+class BestCompanies::State
  attr_accessor :name
- @@all =[]
+ @@all = []
  
  def initialize(name)
   @name = name
@@ -24,7 +24,8 @@ class BestCompanies::Location
  end
  
  def self.find_or_create_by_name(name)
-  find(name) || create(name)
+  state = name.split(", ")[1]
+  find(state) || create(state)
  end
  
  def self.all

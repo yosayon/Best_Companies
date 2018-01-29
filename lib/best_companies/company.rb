@@ -8,7 +8,7 @@ class BestCompanies::Company
      end
       @@all << self
       BestCompanies::Industry.find_or_create_by_name(industry).add_company(self)
-      BestCompanies::Location.find_or_create_by_name(location).add_company(self)
+      BestCompanies::State.find_or_create_by_name(location).add_company(self)
     end
     
     def self.all
