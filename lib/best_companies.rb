@@ -13,8 +13,6 @@ require_relative '../lib/best_companies/company'
 require_relative '../lib/best_companies/scraper'
 require_relative '../lib/best_companies/state'
 
-BestCompanies::CLI.create_list
-
 
 
 

@@ -2,9 +2,10 @@ class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
     
  def self.start
-  puts "Adding companies"
   create_list
   input = ""
+  puts "Welcome!"
+  puts "------------------------------------------------"
   puts "To see the top 5 Best Companies please type 1-5"
   puts "To see the top 10 Best Companies please type 1-10"
   puts "To see the top 20 Best Companies please type 1-20"
@@ -17,6 +18,7 @@ class BestCompanies::CLI
   
   case input
   when "1-5"
+   self.add_ratings(0,4)
    self.see_list(0,4)
   when "1-10"
    self.see_list(0,9)
@@ -48,6 +50,12 @@ class BestCompanies::CLI
    puts "Location: #{company.location}"
    puts "Review_URL: #{company.review_url}"
    puts "------------------------------"
+   puts "Challenges: #{company.challenges}"
+   puts "Atmosphere: #{company.atmosphere}"
+   puts "Rewards: #{company.rewards}"
+   puts "Pride: #{company.pride}"
+   puts "Communication: #{company.communication}"
+   puts "Bosses: #{company.bosses}"
    end
  end
 
@@ -65,11 +73,11 @@ class BestCompanies::CLI
   BestCompanies::Company.create_from_list(company_hash)
  end
  
- def self.add_ratings
-  puts "adding ratings.....this may take a moment"
-  BestCompanies::Company.all.each do |company|
+ def self.add_ratings(num1,num2)
+  dots = "."
+  BestCompanies::Company.all.slice(num1..num2).each do |company|
+   print dots
    if company.review_url != "No Review Available"
-    puts "..."
     ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)
     company.add_ratings(ratings_hash)
    end

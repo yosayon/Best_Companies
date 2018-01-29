@@ -6,4 +6,5 @@ class BestCompanies::Waiting
    print dot
   end
  end
+ binding.pry
 end
