@@ -1,7 +1,6 @@
 class BestCompanies::Industry
  attr_accessor :name
  @@all = []
- @@industries = []
   
   def initialize(name)
    @name = name
@@ -9,7 +8,7 @@ class BestCompanies::Industry
   end
   
   def add_company(company)
-   @company << company.name
+   @company << company.name unless @company.include?(company.name)
   end
    
   def self.create(name)

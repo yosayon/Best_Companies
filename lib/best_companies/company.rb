@@ -3,9 +3,12 @@ class BestCompanies::Company
     @@all =[]
     
     def initialize(company_hash)
-     company_hash.each{|key,value|self.send("#{key}=", value)}
+     company_hash.each do |key,value|
+       self.send("#{key}=", value)
+     end
       @@all << self
       BestCompanies::Industry.find_or_create_by_name(industry).add_company(self)
+      BestCompanies::Location.find_or_create_by_name(location).add_company(self)
     end
     
     def self.all
