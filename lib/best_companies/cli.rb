@@ -1,32 +1,19 @@
-#Create a Company Class - done
-#Create a Scraper Class - done
-#Create a CLI - done
-#Create an Industry Class - done
-#As you create company instances, create industry instances and save that instance with the company instance - done
-#Be able to show all unique company instances - done
-#Be able to show all unique industry instances - done
-#A location can have many companies but a company can have only one location - just a note
-#Be able to add a company instances to industry instance variable companies. ---next to do
-
-
-
-
 class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
     
  def self.start
+  puts "Adding companies"
   create_list
-  puts "You added industries"
   input = ""
-   puts "To see the top 5 Best Companies please type 1-5"
-   puts "To see the top 10 Best Companies please type 1-10"
-   puts "To see the top 20 Best Companies please type 1-20"
-   puts "To see the top 50 Best Companies please type 1-50"
-   puts "To see the entire list of Best Companies please type 'see list'"
-   puts "To enter in a custom range, type 'custom'"
-   puts "To exit type 'exit"
+  puts "To see the top 5 Best Companies please type 1-5"
+  puts "To see the top 10 Best Companies please type 1-10"
+  puts "To see the top 20 Best Companies please type 1-20"
+  puts "To see the top 50 Best Companies please type 1-50"
+  puts "To see the entire list of Best Companies please type 'see list'"
+  puts "To enter in a custom range, type 'custom'"
+  puts "To exit type 'exit"
    
-   input = gets.strip.to_s
+  input = gets.strip.to_s
   
   case input
   when "1-5"
@@ -52,7 +39,7 @@ class BestCompanies::CLI
     self.start
   end
  end
- 
+
  def self.see_list(num1, num2)
   BestCompanies::Company.all.slice(num1..num2).each do |company|
    puts "Rank: #{company.rank}"

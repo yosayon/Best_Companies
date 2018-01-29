@@ -13,7 +13,7 @@ puts "welcome to the console..."
 # require "pry"
 # Pry.start
 
-BestCompanies::CLI.create_list
+BestCompanies::CLI.start
 
 
 require "irb"
