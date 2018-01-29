@@ -5,7 +5,12 @@ class BestCompanies::Industry
   
   def initialize(name)
    @name = name
-   end
+   @company = []
+  end
+  
+  def add_company(company)
+   @company << company.name
+  end
    
   def self.create(name)
     self.new(name).tap{|i|i.save}
