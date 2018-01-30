@@ -33,7 +33,22 @@ class BestCompanies::State
  end
  
  def self.list_all_states
-  self.all.each{|state|puts "#{state.name}"}
- end
+  input = ""
+  states = self.all.sort{|a,b| a.name <=> b.name}
+  states.each{|state|puts "#{state.name}"}
+  puts "-----------------------------------------"
+  puts "Please enter the state to view the list of companies"
+  puts "Type menu, to go back to the main menu"
+  input = gets.strip
+  
+  case input
+   when self.find(input)
+   self.all.detect{|state|state.name == input}
+   when "menu"
+   BestCompanies::CLI.start
+   else
+   self.list_all_states
+   end
+  end
  
 end
