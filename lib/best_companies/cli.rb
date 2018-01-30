@@ -10,6 +10,7 @@ class BestCompanies::CLI
   puts "To see the top 50 Best Companies please type 1-50"
   puts "To see the entire list of Best Companies please type 'see list'"
   puts "To enter in a custom range, type 'custom'"
+  puts "To view best companies by state, type 'state'"
   puts "To exit type 'exit"
    
   input = gets.strip.to_s
@@ -17,21 +18,28 @@ class BestCompanies::CLI
   case input
   when "1-5"
    self.add_ratings(0,4)
+   self.add_awards(0,4)
    self.see_list(0,4)
   when "1-10"
    self.add_ratings(0,9)
+   self.add_awards(0,9)
    self.see_list(0,9)
   when "1-20"
    self.add_ratings(0,19)
+   self.add_awards(0,19)
    self.see_list(0,19)
   when "1-50"
    self.add_ratings(0,49)
+   self.add_awards(0,49)
    self.see_list(0,49)
   when "see list"
    self.add_ratings(0,99)
+   self.add_awards(0,99)
    self.see_list(0,99)
   when "custom"
    self.custom_list
+  when "state"
+   BestCompanies::State.list_all_states
   when "exit"
    exit
   else
@@ -76,6 +84,8 @@ class BestCompanies::CLI
   
   num1 = (input[0].to_i)-1
   num2 = (input[1].to_i)-1
+  self.add_ratings(num1,num2)
+  self.add_awards(num1,num2)
   self.see_list(num1,num2)
  end
  
@@ -96,9 +106,11 @@ class BestCompanies::CLI
   end
  end
  
- def self.add_awards
-  puts "adding awards.....this may take a moment"
-  BestCompanies::Company.all.each do |company|
+ def self.add_awards(num1,num2)
+  dots = "."
+  puts "\nadding awards..."
+  BestCompanies::Company.all.slice(num1...num2).each do |company|
+   print dots
    if company.review_url != "No Review Available"
     awards = BestCompanies::Scraper.scrape_awards(company.review_url)
     company.add_awards(awards)

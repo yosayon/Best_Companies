@@ -32,4 +32,8 @@ class BestCompanies::State
   @@all
  end
  
+ def self.list_all_states
+  self.all.each{|state|puts "#{state.name}"}
+ end
+ 
 end
