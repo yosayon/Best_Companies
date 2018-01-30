@@ -4,8 +4,6 @@ class BestCompanies::CLI
  def self.start
   create_list
   input = ""
-  puts "Welcome!"
-  puts "------------------------------------------------"
   puts "To see the top 5 Best Companies please type 1-5"
   puts "To see the top 10 Best Companies please type 1-10"
   puts "To see the top 20 Best Companies please type 1-20"
@@ -21,12 +19,16 @@ class BestCompanies::CLI
    self.add_ratings(0,4)
    self.see_list(0,4)
   when "1-10"
+   self.add_ratings(0,9)
    self.see_list(0,9)
   when "1-20"
+   self.add_ratings(0,19)
    self.see_list(0,19)
   when "1-50"
+   self.add_ratings(0,49)
    self.see_list(0,49)
   when "see list"
+   self.add_ratings(0,99)
    self.see_list(0,99)
   when "custom"
    self.custom_list
@@ -44,19 +46,28 @@ class BestCompanies::CLI
 
  def self.see_list(num1, num2)
   BestCompanies::Company.all.slice(num1..num2).each do |company|
-   puts "Rank: #{company.rank}"
-   puts "Name: #{company.name}"
-   puts "Industry: #{company.industry}"
-   puts "Location: #{company.location}"
-   puts "Review_URL: #{company.review_url}"
-   puts "------------------------------"
-   puts "Challenges: #{company.challenges}"
-   puts "Atmosphere: #{company.atmosphere}"
-   puts "Rewards: #{company.rewards}"
-   puts "Pride: #{company.pride}"
-   puts "Communication: #{company.communication}"
-   puts "Bosses: #{company.bosses}"
+   if company.review_url == "No Review Available"
+    puts "\nRank: #{company.rank}"
+    puts "Name: #{company.name}"
+    puts "Industry: #{company.industry}"
+    puts "Location: #{company.location}"
+    puts "Review_URL: #{company.review_url}"
+    puts "------------------------------------------------"
+   else
+    puts "\nRank: #{company.rank}"
+    puts "Name: #{company.name}"
+    puts "Industry: #{company.industry}"
+    puts "Location: #{company.location}"
+    puts "Review_URL: #{company.review_url}"
+    puts "Challenges: #{company.challenges}"
+    puts "Atmosphere: #{company.atmosphere}"
+    puts "Rewards: #{company.rewards}"
+    puts "Pride: #{company.pride}"
+    puts "Communication: #{company.communication}"
+    puts "Bosses: #{company.bosses}"
+    puts "------------------------------------------------"
    end
+  end
  end
 
  def self.custom_list
@@ -75,6 +86,7 @@ class BestCompanies::CLI
  
  def self.add_ratings(num1,num2)
   dots = "."
+  puts "adding ratings..."
   BestCompanies::Company.all.slice(num1..num2).each do |company|
    print dots
    if company.review_url != "No Review Available"

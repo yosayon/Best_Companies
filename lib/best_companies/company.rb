@@ -25,22 +25,6 @@ class BestCompanies::Company
   list = self.all.collect{|company|company.name}
   list.each{|company|puts "#{company}"}
  end
-    
- def self.see_entire_list
-  all.each do |company|
-   puts "Rank: #{company.rank}"
-   puts "Name: #{company.name}"
-   puts "Industry: #{company.industry}"
-   puts "Location: #{company.location}"
-   puts "Review_URL: #{company.review_url}"
-   puts "Challenges: #{company.challenges}"
-   puts "Atmosphere: #{company.atmosphere}"
-   puts "Rewards: #{company.rewards}"
-   puts "Pride: #{company.pride}"
-   puts "Communication: #{company.communication}"
-   puts "Bosses: #{company.bosses}"
-  end
- end
    
  def add_ratings(ratings_hash)
   ratings_hash.each{|key,value|self.send("#{key}=",value)}
