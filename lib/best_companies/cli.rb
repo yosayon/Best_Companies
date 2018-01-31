@@ -3,8 +3,14 @@ class BestCompanies::CLI
     
  def self.start
   create_list
+  #add_ratings
+  #add_awards
+  ask_user
+ end
+ 
+ def self.ask_user
   input = ""
-  puts "To see the top 5 Best Companies please type 1-5"
+  puts "\nTo see the top 5 Best Companies please type 1-5"
   puts "To see the top 10 Best Companies please type 1-10"
   puts "To see the top 20 Best Companies please type 1-20"
   puts "To see the top 50 Best Companies please type 1-50"
@@ -17,24 +23,14 @@ class BestCompanies::CLI
   
   case input
   when "1-5"
-   self.add_ratings(0,4)
-   self.add_awards(0,4)
    self.see_list(0,4)
   when "1-10"
-   self.add_ratings(0,9)
-   self.add_awards(0,9)
    self.see_list(0,9)
   when "1-20"
-   self.add_ratings(0,19)
-   self.add_awards(0,19)
    self.see_list(0,19)
   when "1-50"
-   self.add_ratings(0,49)
-   self.add_awards(0,49)
    self.see_list(0,49)
   when "see list"
-   self.add_ratings(0,99)
-   self.add_awards(0,99)
    self.see_list(0,99)
   when "custom"
    self.custom_list
@@ -44,12 +40,13 @@ class BestCompanies::CLI
    exit
   else
    puts "That's not a valid input:"
-   self.start
+   self.ask_user
   end
   
   while input != "exit"
-    self.start
+    self.ask_user
   end
+  
  end
 
  def self.see_list(num1, num2)
@@ -84,8 +81,6 @@ class BestCompanies::CLI
   
   num1 = (input[0].to_i)-1
   num2 = (input[1].to_i)-1
-  self.add_ratings(num1,num2)
-  self.add_awards(num1,num2)
   self.see_list(num1,num2)
  end
  
@@ -94,10 +89,10 @@ class BestCompanies::CLI
   BestCompanies::Company.create_from_list(company_hash)
  end
  
- def self.add_ratings(num1,num2)
+ def self.add_ratings
   dots = "."
   puts "adding ratings..."
-  BestCompanies::Company.all.slice(num1..num2).each do |company|
+  BestCompanies::Company.all.each do |company|
    print dots
    if company.review_url != "No Review Available"
     ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)
@@ -106,10 +101,10 @@ class BestCompanies::CLI
   end
  end
  
- def self.add_awards(num1,num2)
+ def self.add_awards
   dots = "."
   puts "\nadding awards..."
-  BestCompanies::Company.all.slice(num1...num2).each do |company|
+  BestCompanies::Company.all.each do |company|
    print dots
    if company.review_url != "No Review Available"
     awards = BestCompanies::Scraper.scrape_awards(company.review_url)

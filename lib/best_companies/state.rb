@@ -1,5 +1,6 @@
 class BestCompanies::State
  attr_accessor :name
+ attr_reader :company
  @@all = []
  
  def initialize(name)
@@ -33,22 +34,32 @@ class BestCompanies::State
  end
  
  def self.list_all_states
-  input = ""
   states = self.all.sort{|a,b| a.name <=> b.name}
-  states.each{|state|puts "#{state.name}"}
+  states.each{|s|puts "#{s.name}"}
+  self.enter_state
+ end
+ 
+ def self.enter_state
+  input = ""
   puts "-----------------------------------------"
   puts "Please enter the state to view the list of companies"
+  puts "To see the list of states again type 'see states'"
   puts "Type menu, to go back to the main menu"
   input = gets.strip
-  
-  case input
-   when self.find(input)
-   self.all.detect{|state|state.name == input}
-   when "menu"
-   BestCompanies::CLI.start
-   else
+  if input == "menu"
+   BestCompanies::CLI.ask_user
+  elsif input == "see states"
    self.list_all_states
+  elsif self.find(name) == true
+   self.all.detect do|state|
+    if state.name == input
+    puts "#{state.company}"
+    end
    end
+  else
+   puts "That's not a valid input. Please try again."
   end
+ end
  
 end
+ 
