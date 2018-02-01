@@ -1,5 +1,5 @@
 class BestCompanies::Company
- attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
+ attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses
  @@all =[]
     
  def initialize(company_hash)
