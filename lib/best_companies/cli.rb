@@ -3,7 +3,7 @@ class BestCompanies::CLI
     
  def self.start
   create_list
-  #add_ratings
+  add_ratings
   #add_awards
   ask_user
  end
@@ -78,7 +78,6 @@ class BestCompanies::CLI
  def self.custom_list
   puts "Please enter your range between 1-100, separated by a dash. For example: 15-20"
   input = gets.strip.split("-")
-  
   num1 = (input[0].to_i)-1
   num2 = (input[1].to_i)-1
   self.see_list(num1,num2)

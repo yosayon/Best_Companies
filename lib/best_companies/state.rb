@@ -46,18 +46,19 @@ class BestCompanies::State
   puts "To see the list of states again type 'see states'"
   puts "Type menu, to go back to the main menu"
   input = gets.strip
+  
+  validate_input = self.all.detect{|state|state.name == input}
+  
   if input == "menu"
    BestCompanies::CLI.ask_user
   elsif input == "see states"
    self.list_all_states
-  elsif self.find(name) == true
-   self.all.detect do|state|
-    if state.name == input
-    puts "#{state.company}"
-    end
-   end
+  elsif validate_input.name != nil
+    puts "#{validate_input.company}"
+    self.enter_state
   else
    puts "That's not a valid input. Please try again."
+   self.list_all_states
   end
  end
  
