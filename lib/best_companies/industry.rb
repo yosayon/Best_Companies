@@ -3,7 +3,7 @@ class BestCompanies::Industry
  @@all = []
   
  def initialize(name)
-   @name = name
+  @name = name
   @company = []
  end
  
@@ -20,11 +20,11 @@ class BestCompanies::Industry
  end
  
  def self.find(name)
-   all.detect{|i|i.name == name}
+  all.detect{|i|i.name == name}
  end
   
  def self.find_or_create_by_name(name)
-    find(name) || create(name)
+  find(name) || create(name)
  end
   
  def self.all
@@ -32,7 +32,7 @@ class BestCompanies::Industry
  end
  
  def self.list_all_industries
- self.all.each{|industry| puts "Industry: #{industry.name}"}
+  self.all.each{|industry| puts "Industry: #{industry.name}"}
  end
  
 end
