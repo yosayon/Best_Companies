@@ -63,6 +63,7 @@ class BestCompanies::State
  def self.validate_input(input)
   validated_input = self.all.detect{|state|state.name == input}
   if validated_input != nil
+   puts "--------------------------"
    validated_input.company.each{|company|puts "#{company}"}
    self.enter_state
   else
@@ -72,5 +73,3 @@ class BestCompanies::State
  end
  
 end
- 
- 
