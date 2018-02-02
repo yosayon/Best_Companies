@@ -1,4 +1,9 @@
 class BestCompanies::Industry
+ extend Nameable::ClassMethods
+ extend Findable::ClassMethods
+ extend Persistable::ClassMethods
+ include Persistable::InstanceMethods
+ 
  attr_accessor :name
  @@all = []
   
