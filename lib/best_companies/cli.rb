@@ -8,8 +8,7 @@ class BestCompanies::CLI
  
  def self.ask_user
   input = ""
-  puts "\nTo see the top 5 Best Companies please type 1-5"
-  puts "To see the top 10 Best Companies please type 1-10"
+  puts "\nTo see the top 5 Best Companies please type 1-10"
   puts "To see the top 20 Best Companies please type 1-20"
   puts "To see the top 50 Best Companies please type 1-50"
   puts "To see the entire list of Best Companies please type 'see list'"
@@ -20,9 +19,6 @@ class BestCompanies::CLI
   input = gets.strip.to_s
   
   case input
-  when "1-5"
-   BestCompanies::Company.list_all(0,4)
-   self.see_ratings_and_awards
   when "1-10"
    BestCompanies::Company.list_all(0,9)
    self.see_ratings_and_awards
