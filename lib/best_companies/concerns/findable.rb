@@ -1,4 +1,4 @@
-module Concerns::Findable
+module Findable
     
  module ClassMethods
   def find_by_name(name)
@@ -6,8 +6,7 @@ module Concerns::Findable
   end
   
   def find_or_create_by_name(name)
-   name = name.split(", ")[1]
-  find(name) || create(name)
+   find_by_name(name) || create(name)
   end
  end 
  
