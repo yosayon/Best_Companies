@@ -3,21 +3,22 @@ class BestCompanies::Scraper
   companies = Array.new
   doc = Nokogiri::HTML(open(url))
   doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
-   name = company.css(".thumb-text h2").text.split(". ")[1]
+   name = company.css(".thumb-text h2").text
+   #split(". ")[1]
    rank = company.css(".thumb-text h2").text.split(". ")[0]
    industry = company.css(".thumb-text h5")[0].text
    location = company.css(".thumb-text h5")[1].text
    review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
    companies << {
     :rank => rank,
-    :name => name,
+    :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
     :industry => industry,
     :location => location,
-    :review_url => review_url == [] ? "No Review Available" : review_url.join("")
-    }
+    :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
   end
    companies
  end
+ 
 
  def self.scrape_ratings(url)
   ratings = Hash.new
