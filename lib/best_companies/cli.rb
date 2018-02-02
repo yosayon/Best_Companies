@@ -52,6 +52,7 @@ class BestCompanies::CLI
   puts "To view the ratings and awards for a company, enter the company name"
   puts "Type menu to go back to the main menu"
   puts "Type exit to exit"
+  puts "------------------------------------------------"
   
   input = gets.strip
   
@@ -63,12 +64,14 @@ class BestCompanies::CLI
   else
    self.validate_input(input)
   end
+  self.see_ratings_and_awards
  end
  
  def self.validate_input(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.name == input}
   if validated_input != nil
    validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+   self.see_company(validated_input)
    #BestCompanies::Scraper.scrape_awards(validate_input.review_url)
   else
    puts "Your input was invalid. Please try again"
@@ -78,28 +81,28 @@ class BestCompanies::CLI
 
  def self.see_list(num1, num2)
   BestCompanies::Company.all.slice(num1..num2).each do |company|
-   if company.review_url == "No Review Available"
     puts "\nRank: #{company.rank}"
     puts "Name: #{company.name}"
     puts "Industry: #{company.industry}"
     puts "Location: #{company.location}"
     puts "Review_URL: #{company.review_url}"
     puts "------------------------------------------------"
-   else
-    puts "\nRank: #{company.rank}"
-    puts "Name: #{company.name}"
-    puts "Industry: #{company.industry}"
-    puts "Location: #{company.location}"
-    puts "Review_URL: #{company.review_url}"
-    puts "Challenges: #{company.challenges}"
-    puts "Atmosphere: #{company.atmosphere}"
-    puts "Rewards: #{company.rewards}"
-    puts "Pride: #{company.pride}"
-    puts "Communication: #{company.communication}"
-    puts "Bosses: #{company.bosses}"
-    puts "------------------------------------------------"
-   end
   end
+ end
+ 
+ def self.see_company(company)
+  puts "\nRank: #{company.rank}"
+  puts "Name: #{company.name}"
+  puts "Industry: #{company.industry}"
+  puts "Location: #{company.location}"
+  puts "Review_URL: #{company.review_url}"
+  puts "Challenges: #{company.challenges}"
+  puts "Atmosphere: #{company.atmosphere}"
+  puts "Rewards: #{company.rewards}"
+  puts "Pride: #{company.pride}"
+  puts "Communication: #{company.communication}"
+  puts "Bosses: #{company.bosses}"
+  puts "------------------------------------------------"
  end
 
  def self.custom_list
