@@ -3,9 +3,6 @@ class BestCompanies::CLI
     
  def self.start
   create_list
-  add_ratings
-  #add_awards
-  binding.pry
   ask_user
  end
  
@@ -25,6 +22,7 @@ class BestCompanies::CLI
   case input
   when "1-5"
    self.see_list(0,4)
+   self.see_ratings_and_awards
   when "1-10"
    self.see_list(0,9)
   when "1-20"
@@ -48,6 +46,33 @@ class BestCompanies::CLI
     self.ask_user
   end
   
+ end
+ 
+ def self.see_ratings_and_awards
+  puts "To view the ratings and awards for a company, enter the company name"
+  puts "Type menu to go back to the main menu"
+  puts "Type exit to exit"
+  
+  input = gets.strip
+  
+  case input
+  when "menu"
+   self.ask_user
+  when "exit"
+   exit
+  else
+   self.validate_input(input)
+  end
+ end
+ 
+ def self.validate_input(input)
+  validated_input = BestCompanies::Company.all.detect{|c|c.name == input}
+  if validated_input != nil
+   BestCompanies::Company.check_review
+  else
+   puts "Your input was invalid. Please try again"
+   self.see_ratings_and_awards
+  end
  end
 
  def self.see_list(num1, num2)
