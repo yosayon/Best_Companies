@@ -100,16 +100,16 @@ class BestCompanies::CLI
   end
  end
  
- def self.add_awards
-  dots = "."
-  puts "\nadding awards..."
-  BestCompanies::Company.all.each do |company|
-   print dots
-   if company.review_url != "No Review Available"
-    awards = BestCompanies::Scraper.scrape_awards(company.review_url)
-    company.add_awards(awards)
-   end
-  end
+ #def self.add_awards
+ # dots = "."
+ # puts "\nadding awards..."
+ # BestCompanies::Company.all.each do |company|
+ #  print dots
+ #  if company.review_url != "No Review Available"
+ #   awards = BestCompanies::Scraper.scrape_awards(company.review_url)
+ #   company.add_awards(awards)
+ #  end
+ # end
  end
  
 end
