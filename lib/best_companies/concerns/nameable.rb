@@ -1,4 +1,4 @@
-module Concerns::Nameable
+module Nameable
  
  module ClassMethods
   def create(name)
