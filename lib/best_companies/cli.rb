@@ -5,6 +5,7 @@ class BestCompanies::CLI
   create_list
   add_ratings
   #add_awards
+  binding.pry
   ask_user
  end
  
@@ -110,6 +111,6 @@ class BestCompanies::CLI
  #   company.add_awards(awards)
  #  end
  # end
- end
+ #end
  
 end
