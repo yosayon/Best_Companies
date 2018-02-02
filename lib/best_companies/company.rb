@@ -29,6 +29,14 @@ class BestCompanies::Company
  def add_ratings(ratings_hash)
   ratings_hash.each{|key,value|self.send("#{key}=",value)}
  end
+ 
+ def self.list_all(num1=0,num2=99)
+  puts "------------------------------------------------"
+  self.all.slice(num1..num2).each do |company|
+   puts "#{company.rank}: #{company.name}"
+   puts "------------------------------------------------"
+  end
+ end
   
  #def add_awards(awards_array)
  # self.send("awards=",awards_array)
