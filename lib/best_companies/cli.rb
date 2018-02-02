@@ -72,7 +72,7 @@ class BestCompanies::CLI
   validated_input = BestCompanies::Company.all.detect{|c|c.name == input}
   if validated_input != nil
    validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validate_input.review_url))
+   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
    self.see_company(validated_input)
   else
    puts "Your input was invalid. Please try again"
