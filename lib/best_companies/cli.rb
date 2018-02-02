@@ -21,7 +21,7 @@ class BestCompanies::CLI
   
   case input
   when "1-5"
-   self.see_list(0,4)
+   BestCompanies::Company.list_all(0,4)
    self.see_ratings_and_awards
   when "1-10"
    self.see_list(0,9)
