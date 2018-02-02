@@ -103,7 +103,8 @@ class BestCompanies::CLI
   puts "Pride: #{company.pride}"
   puts "Communication: #{company.communication}"
   puts "Bosses: #{company.bosses}"
-  puts "Awards: #{company.awards}"
+  puts "Awards: \n"
+  company.awards.each{|award|puts "#{award}"}
   puts "------------------------------------------------"
  end
 
