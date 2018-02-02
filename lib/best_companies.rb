@@ -7,6 +7,10 @@ module BestCompanies
   # Your code goes here...
 end
 
+module Concerns
+    
+end
+
 require_relative '../lib/best_companies/cli'
 require_relative '../lib/best_companies/industry'
 require_relative '../lib/best_companies/company'
