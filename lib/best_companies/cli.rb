@@ -24,15 +24,20 @@ class BestCompanies::CLI
    BestCompanies::Company.list_all(0,4)
    self.see_ratings_and_awards
   when "1-10"
-   self.see_list(0,9)
+   BestCompanies::Company.list_all(0,9)
+   self.see_ratings_and_awards
   when "1-20"
-   self.see_list(0,19)
+   BestCompanies::Company.list_all(0,19)
+   self.see_ratings_and_awards
   when "1-50"
-   self.see_list(0,49)
+   BestCompanies::Company.list_all(0,49)
+   self.see_ratings_and_awards
   when "see list"
-   self.see_list(0,99)
+   BestCompanies::Company.list_all(0,99)
+   self.see_ratings_and_awards
   when "custom"
    self.custom_list
+   self.see_ratings_and_awards
   when "state"
    BestCompanies::State.list_all_states
   when "exit"
@@ -110,7 +115,7 @@ class BestCompanies::CLI
   input = gets.strip.split("-")
   num1 = (input[0].to_i)-1
   num2 = (input[1].to_i)-1
-  self.see_list(num1,num2)
+  BestCompanies::Company.list_all(num1,num2)
  end
  
  def self.create_list
