@@ -8,7 +8,7 @@ class BestCompanies::Company
   end
   @@all << self
   BestCompanies::Industry.find_or_create_by_name(industry).add_company(self)
-  BestCompanies::State.find_or_create_by_name(location).add_company(self)
+  BestCompanies::State.find_or_create_by_name(location.split(", ")[1]).add_company(self)
  end
     
  def self.all
@@ -30,8 +30,8 @@ class BestCompanies::Company
   ratings_hash.each{|key,value|self.send("#{key}=",value)}
  end
   
- def add_awards(awards_array)
-  self.send("awards=",awards_array)
- end
+ #def add_awards(awards_array)
+ # self.send("awards=",awards_array)
+ #end
  
 end
