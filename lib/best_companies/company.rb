@@ -34,8 +34,8 @@ class BestCompanies::Company
   puts "------------------------------------------------"
   self.all.slice(num1..num2).each do |company|
    puts "#{company.rank}: #{company.name}"
-   puts "------------------------------------------------"
   end
+  puts "------------------------------------------------"
  end
   
  #def add_awards(awards_array)
