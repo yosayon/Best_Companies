@@ -7,6 +7,9 @@ module BestCompanies
   # Your code goes here...
 end
 
+require_relative '../lib/best_companies/concerns/findable'
+require_relative '../lib/best_companies/concerns/nameable'
+require_relative '../lib/best_companies/concerns/persistable'
 require_relative '../lib/best_companies/cli'
 require_relative '../lib/best_companies/industry'
 require_relative '../lib/best_companies/company'
