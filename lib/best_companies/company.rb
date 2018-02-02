@@ -1,5 +1,5 @@
 class BestCompanies::Company
- attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses
+ attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
  @@all =[]
     
  def initialize(company_hash)
@@ -38,8 +38,8 @@ class BestCompanies::Company
   puts "------------------------------------------------"
  end
   
- #def add_awards(awards_array)
- # self.send("awards=",awards_array)
- #end
+ def add_awards(awards_array)
+  self.send("awards=",awards_array)
+ end
  
 end
