@@ -68,7 +68,8 @@ class BestCompanies::CLI
  def self.validate_input(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.name == input}
   if validated_input != nil
-   BestCompanies::Company.check_review
+   validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+   #BestCompanies::Scraper.scrape_awards(validate_input.review_url)
   else
    puts "Your input was invalid. Please try again"
    self.see_ratings_and_awards
@@ -114,17 +115,14 @@ class BestCompanies::CLI
   BestCompanies::Company.create_from_list(company_hash)
  end
  
- def self.add_ratings
-  dots = "."
-  puts "adding ratings..."
-  BestCompanies::Company.all.each do |company|
-   print dots
-   if company.review_url != "No Review Available"
-    ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)
-    company.add_ratings(ratings_hash)
-   end
-  end
- end
+# def self.add_ratings(hash)
+#  puts "adding ratings..."
+#  BestCompanies::Company.all.each do |company|
+#    ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)
+#    company.add_ratings(ratings_hash)
+#   end
+#  end
+# end
  
  #def self.add_awards
  # dots = "."
