@@ -2,19 +2,20 @@ class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
     
  def self.start
+  puts "\nWelcome!".bold
   create_list
   ask_user
  end
  
  def self.ask_user
   input = ""
-  puts "\nTo see the top 5 Best Companies please type 1-10"
-  puts "To see the top 20 Best Companies please type 1-20"
-  puts "To see the top 50 Best Companies please type 1-50"
-  puts "To see the entire list of Best Companies please type 'see list'"
-  puts "To enter in a custom range, type 'custom'"
-  puts "To view best companies by state, type 'state'"
-  puts "To exit type 'exit"
+  puts "\nTo see the top 5 Best Companies please type 1-10".colorize(:light_blue)
+  puts "To see the top 20 Best Companies please type 1-20".colorize(:light_blue)
+  puts "To see the top 50 Best Companies please type 1-50".colorize(:light_blue)
+  puts "To see the entire list of Best Companies please type 'see list'".colorize(:light_blue)
+  puts "To enter in a custom range, type 'custom'".colorize(:light_blue)
+  puts "To view best companies by state, type 'state'".colorize(:light_blue)
+  puts "To exit type 'exit".colorize(:light_blue)
    
   input = gets.strip.to_s
   
@@ -50,9 +51,9 @@ class BestCompanies::CLI
  end
  
  def self.see_ratings_and_awards
-  puts "To view the ratings and awards for a company, enter the company rank"
-  puts "Type menu to go back to the main menu"
-  puts "Type exit to exit"
+  puts "To view the ratings and awards for a company, enter the company rank".colorize(:light_blue)
+  puts "Type menu to go back to the main menu".colorize(:light_blue)
+  puts "Type exit to exit".colorize(:light_blue)
   puts "------------------------------------------------"
   
   input = gets.strip
