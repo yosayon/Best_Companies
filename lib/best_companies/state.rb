@@ -22,7 +22,7 @@ class BestCompanies::State
  end
  
  def self.list_all_states
-  puts "-------------------------------"
+  puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
   states.each{|s|puts "#{s.name}"}
   self.enter_state
@@ -31,9 +31,9 @@ class BestCompanies::State
  def self.enter_state
   input = ""
   puts "-----------------------------------------"
-  puts "Please enter the state to view the list of companies"
-  puts "To see the list of states again type 'see states'"
-  puts "Type menu, to go back to the main menu"
+  puts "Please enter the state to view the list of companies".colorize(:light_blue)
+  puts "To see the list of states again type 'see states'".colorize(:light_blue)
+  puts "Type menu, to go back to the main menu".colorize(:light_blue)
   puts "------------------------------------------"
   input = gets.strip
   case input
@@ -51,7 +51,7 @@ class BestCompanies::State
  def self.validate_input(input)
   validated_input = self.all.detect{|state|state.name == input}
   if validated_input != nil
-   puts "--------------------------"
+   puts "-----------------------------------------"
    validated_input.company.each{|company|puts "#{company}"}
    self.enter_state
   else
