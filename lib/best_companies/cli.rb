@@ -102,14 +102,15 @@ class BestCompanies::CLI
   puts "Industry: #{company.industry}"
   puts "Location: #{company.location}"
   puts "Review_URL: #{company.review_url}"
-  puts "Challenges: #{company.challenges}"
-  puts "Atmosphere: #{company.atmosphere}"
-  puts "Rewards: #{company.rewards}"
-  puts "Pride: #{company.pride}"
-  puts "Communication: #{company.communication}"
-  puts "Bosses: #{company.bosses}"
+  puts "Ratings: \n"
+  puts " Challenges: #{company.challenges}"
+  puts " Atmosphere: #{company.atmosphere}"
+  puts " Rewards: #{company.rewards}"
+  puts " Pride: #{company.pride}"
+  puts " Communication: #{company.communication}"
+  puts " Bosses: #{company.bosses}"
   puts "Awards: \n"
-  company.awards.each{|award|puts "#{award}"}
+  company.awards.each{|award|puts " #{award}"}
   puts "------------------------------------------------"
  end
 
