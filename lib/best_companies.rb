@@ -2,6 +2,7 @@
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'colorize'
 
 module BestCompanies
   # Your code goes here...
