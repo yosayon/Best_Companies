@@ -11,7 +11,7 @@ class BestCompanies::Scraper
    review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
    companies << {
     :rank => rank,
-    :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
+    :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
     :industry => industry,
     :location => location,
     :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
