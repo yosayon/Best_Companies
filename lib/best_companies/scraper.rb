@@ -43,7 +43,7 @@ class BestCompanies::Scraper
   doc = Nokogiri::HTML(open(url))
   awards = doc.css(".awards span.award_list")
   final_awards = awards.children.css("p").map do |award|
-  award.text.gsub("\n","").gsub("\t","").gsub(" ","")
+  award.text.gsub(/(\n)*(\t)*(\s{2,4})/,"")
   end
   final_awards = final_awards.slice(0,6)
   final_awards
