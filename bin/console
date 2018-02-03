@@ -3,7 +3,7 @@
 require "bundler/setup"
 require "best_companies"
 
-puts "welcome to the console..."
+puts "starting console..."
 
 
 # You can add fixtures and/or initialization code here to make experimenting
