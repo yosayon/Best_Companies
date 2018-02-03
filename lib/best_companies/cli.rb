@@ -1,5 +1,7 @@
 class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
+ JOB_PATH = "https://www.indeed.com/q-"
+ JOB_END_PATH = "-jobs.html"
     
  def self.start
   create_list
