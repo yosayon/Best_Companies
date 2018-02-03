@@ -3,6 +3,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'colorize'
+require 'colorized_string'
 
 module BestCompanies
   # Your code goes here...
