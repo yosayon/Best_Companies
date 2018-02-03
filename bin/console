@@ -13,7 +13,7 @@ puts "welcome to the console..."
 # require "pry"
 # Pry.start
 
-BestCompanies::Scraper.scrape_jobs("https://www.indeed.com/q-google-l-10016-jobs.html")
+BestCompanies::CLI.start
 
 
 require "irb"
