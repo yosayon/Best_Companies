@@ -50,7 +50,7 @@ class BestCompanies::CLI
  end
  
  def self.see_ratings_and_awards
-  puts "To view the ratings and awards for a company, enter the company name"
+  puts "To view the ratings and awards for a company, enter the company rank"
   puts "Type menu to go back to the main menu"
   puts "Type exit to exit"
   puts "------------------------------------------------"
@@ -69,7 +69,7 @@ class BestCompanies::CLI
  end
  
  def self.validate_input(input)
-  validated_input = BestCompanies::Company.all.detect{|c|c.name == input}
+  validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
   if validated_input != nil && validated_input.review_url != "No Review Available"
    validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
    validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
