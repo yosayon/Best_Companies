@@ -97,20 +97,20 @@ class BestCompanies::CLI
  end
  
  def self.see_company(company)
-  puts "\nRank: #{company.rank}"
-  puts "Name: #{company.name}"
-  puts "Industry: #{company.industry}"
-  puts "Location: #{company.location}"
-  puts "Review_URL: #{company.review_url}"
+  puts "\nRank:".colorize(:red) + " #{company.rank}"
+  puts "Name:".colorize(:red) + " #{company.name}"
+  puts "Industry:".colorize(:red) + " #{company.industry}"
+  puts "Location:".colorize(:red) + " #{company.location}"
+  puts "Review_URL:".colorize(:red) + " #{company.review_url}"
   puts "Ratings: \n"
-  puts " Challenges: #{company.challenges}"
-  puts " Atmosphere: #{company.atmosphere}"
-  puts " Rewards: #{company.rewards}"
-  puts " Pride: #{company.pride}"
-  puts " Communication: #{company.communication}"
-  puts " Bosses: #{company.bosses}"
+  puts " Challenges:".colorize(:red) + " #{company.challenges}"
+  puts " Atmosphere:".colorize(:red) + " #{company.atmosphere}"
+  puts " Rewards:".colorize(:red) + " #{company.rewards}"
+  puts " Pride:".colorize(:red) + " #{company.pride}"
+  puts " Communication:".colorize(:red) + " #{company.communication}"
+  puts " Bosses:".colorize(:red) + " #{company.bosses}"
   puts "Awards: \n"
-  company.awards.each{|award|puts " #{award}"}
+  company.awards.each{|award|puts " #{award}".colorize(:green)}
   puts "------------------------------------------------"
  end
 
