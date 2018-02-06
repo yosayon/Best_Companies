@@ -1,21 +1,21 @@
 class BestCompanies::Scraper
  def self.scrape_companies(url)
   companies = Array.new
+  review_urls = Array.new
   doc = Nokogiri::HTML(open(url))
   doc.css(".container #list-detail-left-column div.row.company .col-md-5").children.each do |company|
    ranks = company.css(".rank.large").text.split(" ")
    names = company.css("a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")}
    industries = company.css(".industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}
    locations = company.css(".location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}
-   #location = company.css(".thumb-text h5")[1].text
-   #review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
-   #companies << {
-   
-   # :location => location,
-   # :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
   end
+ end
+ 
+ def self.scrape_review_urls(url)
+  review_urls = Array.new
+  doc = Nokogiri::HTML(open(url))
+  doc.css(".container .col-xs-12 .col-md-5 a").attribute("href").value
   binding.pry
-   #companies
  end
  
 
