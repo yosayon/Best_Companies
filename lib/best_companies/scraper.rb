@@ -4,17 +4,13 @@ class BestCompanies::Scraper
   doc = Nokogiri::HTML(open(url))
   doc.css(".container #list-detail-left-column div.row.company .col-md-5").children.each do |company|
    ranks = company.css(".rank.large").text.split(" ")
-   names = company.css("a.title").text.split("\n").map do |name|
-    name.gsub(/\s{2,6}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")
-   end
-   industries = company.css(".industry").text.split("\n").map{|i|i.gsub(/\s{2,6}/,"")}
-   #industry = company.css(".thumb-text h5")[0].text
+   names = company.css("a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")}
+   industries = company.css(".industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}
+   locations = company.css(".location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}
    #location = company.css(".thumb-text h5")[1].text
    #review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
    #companies << {
-   # :rank => rank,
-   # :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
-   # :industry => industry,
+   
    # :location => location,
    # :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
   end
