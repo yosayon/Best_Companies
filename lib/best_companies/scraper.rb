@@ -4,10 +4,10 @@ class BestCompanies::Scraper
   doc = Nokogiri::HTML(open(url))
   doc.css(".container #list-detail-left-column div.row.company .col-md-5").children.each do |company|
    ranks = company.css(".rank.large").text.split(" ")
-   names = company.css("a.title").text.split(" ").map do |name|
+   names = company.css("a.title").text.split("\n").map do |name|
     name.gsub(/\s{2,6}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")
    end
-   #rank = company.css(".rank").text.gsub(/\s/,"")
+   industries = company.css(".industry").text.split("\n").map{|i|i.gsub(/\s{2,6}/,"")}
    #industry = company.css(".thumb-text h5")[0].text
    #location = company.css(".thumb-text h5")[1].text
    #review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
@@ -18,7 +18,6 @@ class BestCompanies::Scraper
    # :location => location,
    # :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
   end
-  names
   binding.pry
    #companies
  end
