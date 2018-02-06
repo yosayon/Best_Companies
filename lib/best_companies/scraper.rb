@@ -1,21 +1,35 @@
 class BestCompanies::Scraper
+ attr_accessor :ranks, :names, :industries, :locations
+ 
  def self.scrape_companies(url)
-  companies = Array.new
   review_urls = Array.new
   doc = Nokogiri::HTML(open(url))
-  doc.css(".container #list-detail-left-column div.row.company .col-md-5").children.each do |company|
-   ranks = company.css(".rank.large").text.split(" ")
-   names = company.css("a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")}
-   industries = company.css(".industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}
-   locations = company.css(".location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}
+   ranks = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .rank").text.split(" ")
+   names = doc.css(".container #list-detail-left-column div.row.company .col-md-5 a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"")}.slice(1,100)
+   industries = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}.slice(1,100)
+   locations = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}.slice(1,100)
+   self.create_company_hash(ranks,names,industries,locations)
+ end
+ 
+ def self.create_company_hash(ranks,names,industries,locations)
+  companies = Array.new
+  count = 0
+  while count < 100
+   companies << 
+   {:rank => ranks[count],
+    :name => names[count],
+    :industry => industries[count],
+    :location => locations[count]
+   }
+   count += 1
   end
+  companies
  end
  
  def self.scrape_review_urls(url)
   review_urls = Array.new
   doc = Nokogiri::HTML(open(url))
   doc.css(".container .col-xs-12 .col-md-5 a").attribute("href").value
-  binding.pry
  end
  
 
