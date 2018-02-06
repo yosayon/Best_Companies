@@ -26,7 +26,6 @@ class BestCompanies::Scraper
    count += 1
   end
   companies
-  binding.pry
  end
  
 
