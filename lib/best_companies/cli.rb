@@ -4,7 +4,7 @@ class BestCompanies::CLI
  def self.start
   puts "\nWelcome!".bold
   create_list
-  binding.pry
+  BestCompanies::Scraper.scrape_review_urls(BASE_PATH)
   ask_user
  end
  
