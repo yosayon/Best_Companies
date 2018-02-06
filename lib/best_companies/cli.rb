@@ -4,6 +4,7 @@ class BestCompanies::CLI
  def self.start
   puts "\nWelcome!".bold
   create_list
+  binding.pry
   ask_user
  end
  
