@@ -8,11 +8,11 @@ class BestCompanies::Scraper
    names = doc.css(".container #list-detail-left-column div.row.company .col-md-5 a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"")}.slice(1,100)
    industries = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}.slice(1,100)
    locations = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}.slice(1,100)
-   review_urls = doc.css(".container .col-xs-12 .col-md-5 a.review-link[href]")
-   self.create_company_hash(ranks,names,industries,locations,review_links)
+   review_urls = doc.css(".container .col-xs-12 .col-md-5 a.review-link[href]").map{|l|l["href"]}
+   self.create_company_hash(ranks,names,industries,locations,review_urls)
  end
  
- def self.create_company_hash(ranks,names,industries,locations,review_links)
+ def self.create_company_hash(ranks,names,industries,locations,review_urls)
   companies = Array.new
   count = 0
   while count < 100
@@ -21,11 +21,12 @@ class BestCompanies::Scraper
     :name => names[count],
     :industry => industries[count],
     :location => locations[count],
-    :review_url => review_links[count]
+    :review_url => review_urls[count]
    }
    count += 1
   end
   companies
+  binding.pry
  end
  
 
