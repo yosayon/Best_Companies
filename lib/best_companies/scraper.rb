@@ -2,21 +2,25 @@ class BestCompanies::Scraper
  def self.scrape_companies(url)
   companies = Array.new
   doc = Nokogiri::HTML(open(url))
-  doc.css(".thumb-listing .row .col-lg-3 .listing-thumb").each do |company|
-   name = company.css(".thumb-text h2").text
-   #split(". ")[1]
-   rank = company.css(".thumb-text h2").text.split(". ")[0]
-   industry = company.css(".thumb-text h5")[0].text
-   location = company.css(".thumb-text h5")[1].text
-   review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
-   companies << {
-    :rank => rank,
-    :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
-    :industry => industry,
-    :location => location,
-    :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
+  doc.css(".container #list-detail-left-column div.row.company .col-md-5").children.each do |company|
+   ranks = company.css(".rank.large").text.split(" ")
+   names = company.css("a.title").text.split(" ").map do |name|
+    name.gsub(/\s{2,6}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)","")
+   end
+   #rank = company.css(".rank").text.gsub(/\s/,"")
+   #industry = company.css(".thumb-text h5")[0].text
+   #location = company.css(".thumb-text h5")[1].text
+   #review_url = company.css(".thumb-img a").map{|link|link.attribute("href").value}
+   #companies << {
+   # :rank => rank,
+   # :name => name.gsub(/\d+\.\s/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"").gsub("(SAP America)",""),
+   # :industry => industry,
+   # :location => location,
+   # :review_url => review_url == [] ? "No Review Available" : review_url.join("")}
   end
-   companies
+  names
+  binding.pry
+   #companies
  end
  
 
@@ -47,6 +51,6 @@ class BestCompanies::Scraper
   end
   final_awards = final_awards.slice(0,6)
   final_awards
- end
+  end
 
 end
