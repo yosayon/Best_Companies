@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'colorize'
 require 'colorized_string'
+require 'faraday'
 
 module BestCompanies
   # Your code goes here...
