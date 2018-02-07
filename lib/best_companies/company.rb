@@ -1,6 +1,7 @@
 class BestCompanies::Company
  attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
  @@all =[]
+ @@archive = []
     
  def initialize(company_hash)
   company_hash.each do |key,value|
@@ -40,6 +41,11 @@ class BestCompanies::Company
   
  def add_awards(awards_array)
   self.send("awards=",awards_array)
+ end
+ 
+ def self.save?(company)
+  @@archive << company unless archive.include?(company)
+  @@archive
  end
  
 end
