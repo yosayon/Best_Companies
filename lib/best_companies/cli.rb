@@ -116,7 +116,7 @@ class BestCompanies::CLI
   puts "Awards: \n"
   company.awards.each{|award|puts " #{award}".colorize(:green)}
   puts "------------------------------------------------"
-  BestCompanies::Company.save?(company)
+  company.save?
   self.see_ratings_and_awards
  end
 
