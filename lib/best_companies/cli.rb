@@ -113,7 +113,7 @@ class BestCompanies::CLI
   puts "Awards: \n"
   company.awards.each{|award|puts " #{award}".colorize(:green)}
   puts "------------------------------------------------"
-  puts "Would you like to save this in your archives?"
+  BestCompanies::Company.save?(company)
  end
 
  def self.custom_list
