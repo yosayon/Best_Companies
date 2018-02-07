@@ -71,17 +71,14 @@ class BestCompanies::CLI
  
  def self.validate_input(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-  if validated_input != nil
-   binding.pry
-   #if open(validated_input.review_url) == error
-    if doc != nil
-     validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-     validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-     self.see_company(validated_input)
-    else
-     puts "This company does not have a review available, please select another company."
-     puts "------------------------------------------------"
-    end
+  url_status = Faraday.get(validated_input.review_url).status
+  if validated_input != nil && url_status == 200
+   validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
+   self.see_company(validated_input)
+  elsif url_status == 404
+   puts "This company does not have a review available, please select another company."
+   puts "------------------------------------------------"
   else
    puts "Your input was invalid. Please try again"
    puts "------------------------------------------------"
@@ -116,6 +113,7 @@ class BestCompanies::CLI
   puts "Awards: \n"
   company.awards.each{|award|puts " #{award}".colorize(:green)}
   puts "------------------------------------------------"
+  puts "Would you like to save this in your archives?"
  end
 
  def self.custom_list
