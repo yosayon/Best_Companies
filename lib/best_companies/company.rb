@@ -1,7 +1,7 @@
 class BestCompanies::Company
  attr_accessor :rank, :name, :industry, :location, :review_url, :challenges, :atmosphere, :rewards, :pride, :communication, :bosses, :awards
  @@all =[]
- @@archive = []
+ @@archive =[]
     
  def initialize(company_hash)
   company_hash.each do |key,value|
@@ -43,19 +43,24 @@ class BestCompanies::Company
   self.send("awards=",awards_array)
  end
  
- def self.save?(company)
+ def save?
   puts "Would you like to save this company into your archives? Type y or n".colorize(:light_blue)
   input = gets.strip
-  if input == "y" || "Y"
-   @@archive << company unless archive.include?(company) == true
-   puts "This company has been saved to your archives!".colorize(:light_blue)
-   puts "------------------------------------------------"
-  elsif input == "n" || "N"
+  if input == "y" || input == "Y"
+   if @@archive.include?(self)
+    puts "This company is already saved in your archives."
+   else
+    @@archive << self
+    puts "This company has been saved to your archives!".colorize(:light_blue)
+    puts "------------------------------------------------"
+   end
+  else
    puts "You chose not to save this company".colorize(:light_blue)
   end
  end
  
-  def self.archive
-   @@archive
-  end
+ def self.archive
+  puts "#{@@archive}"
+ end
+ 
 end
