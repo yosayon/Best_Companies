@@ -44,8 +44,18 @@ class BestCompanies::Company
  end
  
  def self.save?(company)
-  @@archive << company unless archive.include?(company)
-  @@archive
+  puts "Would you like to save this company into your archives? Type y or n".colorize(:light_blue)
+  input = gets.strip
+  if input == "y" || "Y"
+   @@archive << company unless archive.include?(company) == true
+   puts "This company has been saved to your archives!".colorize(:light_blue)
+   puts "------------------------------------------------"
+  elsif input == "n" || "N"
+   puts "You chose not to save this company".colorize(:light_blue)
+  end
  end
  
+  def self.archive
+   @@archive
+  end
 end
