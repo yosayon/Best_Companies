@@ -71,13 +71,17 @@ class BestCompanies::CLI
  
  def self.validate_input(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-  if validated_input != nil && validated_input.review_url != "No Review Available"
-   validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-   self.see_company(validated_input)
-  elsif validated_input != nil && validated_input.review_url == "No Review Available"
-   puts "#{validated_input.name}: #{validated_input.review_url} - Please select another company."
-   puts "------------------------------------------------"
+  if validated_input != nil
+   binding.pry
+   #if open(validated_input.review_url) == error
+    if doc != nil
+     validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+     validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
+     self.see_company(validated_input)
+    else
+     puts "This company does not have a review available, please select another company."
+     puts "------------------------------------------------"
+    end
   else
    puts "Your input was invalid. Please try again"
    puts "------------------------------------------------"
