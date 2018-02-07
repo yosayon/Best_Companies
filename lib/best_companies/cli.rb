@@ -54,6 +54,7 @@ class BestCompanies::CLI
   puts "To view the ratings and awards for a company, enter the company rank".colorize(:light_blue)
   puts "Type menu to go back to the main menu".colorize(:light_blue)
   puts "Type exit to exit".colorize(:light_blue)
+  puts "Type archive to see your saved companies".colorize(:light_blue)
   puts "------------------------------------------------"
   
   input = gets.strip
@@ -61,6 +62,8 @@ class BestCompanies::CLI
   case input
   when "menu"
    self.ask_user
+  when "archive"
+   BestCompanies::Company.archive
   when "exit"
    exit
   else
@@ -114,6 +117,7 @@ class BestCompanies::CLI
   company.awards.each{|award|puts " #{award}".colorize(:green)}
   puts "------------------------------------------------"
   BestCompanies::Company.save?(company)
+  self.see_ratings_and_awards
  end
 
  def self.custom_list
@@ -128,26 +132,5 @@ class BestCompanies::CLI
   company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH)
   BestCompanies::Company.create_from_list(company_hash)
  end
- 
-# def self.add_ratings(hash)
-#  puts "adding ratings..."
-#  BestCompanies::Company.all.each do |company|
-#    ratings_hash = BestCompanies::Scraper.scrape_ratings(company.review_url)
-#    company.add_ratings(ratings_hash)
-#   end
-#  end
-# end
- 
- #def self.add_awards
- # dots = "."
- # puts "\nadding awards..."
- # BestCompanies::Company.all.each do |company|
- #  print dots
- #  if company.review_url != "No Review Available"
- #   awards = BestCompanies::Scraper.scrape_awards(company.review_url)
- #   company.add_awards(awards)
- #  end
- # end
- #end
  
 end
