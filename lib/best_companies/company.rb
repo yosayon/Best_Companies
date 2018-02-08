@@ -60,7 +60,7 @@ class BestCompanies::Company
  end
  
  def self.archive
-  puts "#{@@archive}"
+  @@archive.each{|company|BestCompanies::CLI.see_company(company)}
  end
  
 end
