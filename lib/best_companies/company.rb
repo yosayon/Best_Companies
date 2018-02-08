@@ -60,6 +60,7 @@ class BestCompanies::Company
  end
  
  def self.archive
+  puts "This is where it breaks."
   @@archive.each{|company|BestCompanies::CLI.see_company(company)}
  end
  
