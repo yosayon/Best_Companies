@@ -73,19 +73,21 @@ class BestCompanies::CLI
  end
  
  def self.validate_input(input)
-  validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-  url_status = Faraday.get(validated_input.review_url).status
-  if validated_input != nil && url_status == 200
-   validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-   self.see_company(validated_input)
-  elsif url_status == 404
-   puts "This company does not have a review available, please select another company."
-   puts "------------------------------------------------"
-  else
+  if !(input.to_i).between?(1,100)
    puts "Your input was invalid. Please try again"
    puts "------------------------------------------------"
    self.see_ratings_and_awards
+  else
+   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
+   url_status = Faraday.get(validated_input.review_url).status
+    if validated_input != nil && url_status == 200 
+     validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+     validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
+     self.see_company(validated_input)
+    else url_status == 404
+     puts "This company does not have a review available, please select another company."
+     puts "------------------------------------------------"
+    end
   end
  end
 
