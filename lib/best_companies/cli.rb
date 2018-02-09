@@ -27,21 +27,8 @@ class BestCompanies::CLI
   self.validate_input(input)
   
   case input
-  #when "1-10"
-  # BestCompanies::Company.list_all(0,9)
-  # self.see_ratings_and_awards
-  #when "1-20"
-  # BestCompanies::Company.list_all(0,19)
-  # self.see_ratings_and_awards
-  #when "1-50"
-  # BestCompanies::Company.list_all(0,49)
-   #self.see_ratings_and_awards
   when "see list"
    BestCompanies::Company.list_all(0,99)
-   #self.see_ratings_and_awards
-  #when "custom"
-  # self.custom_list
-  # self.see_ratings_and_awards
   when "state"
    BestCompanies::State.list_all_states
   when "archive"
