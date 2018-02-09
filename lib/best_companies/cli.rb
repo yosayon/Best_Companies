@@ -79,13 +79,12 @@ class BestCompanies::CLI
    self.see_ratings_and_awards
   else
    validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-   url_status = Faraday.get(validated_input.review_url).status
-    if validated_input != nil && url_status == 200 
+    if validated_input != nil && validated_input.review_url != "No Review Available"
      validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
      validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
      self.see_company(validated_input)
      BestCompanies::Company.all[(input.to_i)-1].save?
-    else url_status == 404
+    else
      BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
      puts "This company does not have a review available, please select another company."
      BestCompanies::Company.all[(input.to_i)-1].save?
