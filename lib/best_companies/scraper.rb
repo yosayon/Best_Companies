@@ -8,8 +8,21 @@ class BestCompanies::Scraper
    industries = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}.slice(1,100)
    locations = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}.slice(1,100)
    review_urls = doc.css(".container .col-xs-12 .col-md-5 a.review-link[href]").map{|l|l["href"]}
+   self.check_urls(review_urls)
+   binding.pry
    self.create_company_hash(ranks,names,industries,locations,review_urls)
  end
+ 
+ def self.check_urls(review_urls)
+  review_urls.map! do |url|
+   if Faraday.get(url).status == 404
+    url = "No Review Available"
+   else
+    break
+   end
+  end
+   review_urls
+  end
  
  def self.create_company_hash(ranks,names,industries,locations,review_urls)
   companies = Array.new
