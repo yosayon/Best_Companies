@@ -58,12 +58,13 @@ class BestCompanies::Company
   def self.list_all(num1=0,num2=99)
    puts "------------------------------------------------"
    self.all.slice(num1..num2).each do |company|
-   puts "#{company.rank}: #{company.name}"
-   puts "Industry:".colorize(:red) + "#{company.industry}"
-   puts "Location:".colorize(:red) + "#{company.location}"
-   puts "Review_URL:".colorize(:red) + "#{company.review_url}"
-   puts "------------------------------------------------"
- end
+    BestCompanies::CLI.see_company(company)
+   #puts "#{company.rank}: #{company.name}"
+   #puts "Industry:".colorize(:red) + "#{company.industry}"
+   #puts "Location:".colorize(:red) + "#{company.location}"
+   #puts "Review_URL:".colorize(:red) + "#{company.review_url}"
+   #puts "------------------------------------------------"
+  end
  end
  
 end
