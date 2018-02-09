@@ -39,7 +39,6 @@ class BestCompanies::Company
    else
     @@archive << self
     puts "This company has been saved to your archives!".colorize(:light_blue)
-    puts "------------------------------------------------"
    end
   else
    puts "You chose not to save this company".colorize(:light_blue)
