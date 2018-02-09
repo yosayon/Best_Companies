@@ -100,15 +100,15 @@ class BestCompanies::CLI
   puts "Location:".colorize(:red) + " #{company.location}"
   puts "Review_URL:".colorize(:red) + " #{company.review_url}"
   if company.review_url != "No Review Available"
-   puts "Ratings: \n"
-   puts " Challenges:".colorize(:red) + " #{company.challenges}"
-   puts " Atmosphere:".colorize(:red) + " #{company.atmosphere}"
-   puts " Rewards:".colorize(:red) + " #{company.rewards}"
-   puts " Pride:".colorize(:red) + " #{company.pride}"
-   puts " Communication:".colorize(:red) + " #{company.communication}"
-   puts " Bosses:".colorize(:red) + " #{company.bosses}"
-   puts "Awards: \n"
-   company.awards.each{|award|puts " #{award}".colorize(:green)}
+   puts "Ratings:".colorize(:red)
+   puts " Challenges:" + " #{company.challenges}"
+   puts " Atmosphere:". + " #{company.atmosphere}"
+   puts " Rewards:" + " #{company.rewards}"
+   puts " Pride:" + " #{company.pride}"
+   puts " Communication:" + " #{company.communication}"
+   puts " Bosses:" + " #{company.bosses}"
+   puts "Awards:".colorize(:red)
+   company.awards.each{|award|puts " #{award}"}
    puts "------------------------------------------------"
   else
    puts "No ratings".colorize(:red)
