@@ -86,7 +86,9 @@ class BestCompanies::CLI
      self.see_company(validated_input)
      BestCompanies::Company.all[(input.to_i)-1].save?
     else url_status == 404
+     BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
      puts "This company does not have a review available, please select another company."
+     BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
     end
   end
