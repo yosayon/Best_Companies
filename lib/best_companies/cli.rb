@@ -84,7 +84,7 @@ class BestCompanies::CLI
      validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
      validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
      self.see_company(validated_input)
-     BestCompanies::Company.all[input.to_i].save?
+     BestCompanies::Company.all[(input.to_i)-1].save?
     else url_status == 404
      puts "This company does not have a review available, please select another company."
      puts "------------------------------------------------"
@@ -117,7 +117,7 @@ class BestCompanies::CLI
   puts " Communication:".colorize(:red) + " #{company.communication}"
   puts " Bosses:".colorize(:red) + " #{company.bosses}"
   puts "Awards: \n"
-  puts "#{company.awards}".colorize(:green)
+  company.awards.each{|award|puts "#{award}".colorize(:green)}
   puts "------------------------------------------------"
  end
 
