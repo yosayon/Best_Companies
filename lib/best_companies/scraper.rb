@@ -4,7 +4,7 @@ class BestCompanies::Scraper
   review_urls = Array.new
   doc = Nokogiri::HTML(open(url))
    ranks = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .rank").text.split(" ")
-   names = doc.css(".container #list-detail-left-column div.row.company .col-md-5 a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w+\))*/i,"")}.slice(1,100)
+   names = doc.css(".container #list-detail-left-column div.row.company .col-md-5 a.title").text.split("\n").map{|n|n.gsub(/\s{2}/,"").gsub(/(\,*)(\s*incorporated)*(\s*corporation)*(\s*LLP)*(\s*inc\.*)*(\s*llc\.*)*(\(\w\))*/i,"")}.slice(1,100)
    industries = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}.slice(1,100)
    locations = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}.slice(1,100)
    review_urls = doc.css(".container .col-xs-12 .col-md-5 a.review-link[href]").map{|l|l["href"]}
