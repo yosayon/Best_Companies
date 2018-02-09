@@ -7,6 +7,11 @@ class BestCompanies::CLI
   ask_user
  end
  
+ def self.create_list
+  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH)
+  BestCompanies::Company.create_from_list(company_hash)
+ end
+ 
  def self.ask_user
   input = ""
   puts "\n------------------------------------------------"
@@ -136,11 +141,6 @@ class BestCompanies::CLI
    puts "That's an invalid range"
    self.custom_list
   end
- end
- 
- def self.create_list
-  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH)
-  BestCompanies::Company.create_from_list(company_hash)
  end
  
 end
