@@ -52,7 +52,7 @@ class BestCompanies::State
   validated_input = self.all.detect{|state|state.name == input}
   if validated_input != nil
    puts "-----------------------------------------"
-   validated_input.company.each{|company|puts "#{company.name}"}
+   validated_input.company.each{|company|puts "#{company.rank}: #{company.name}"}
    self.enter_state
   else
    puts "invalid input, please try again."
