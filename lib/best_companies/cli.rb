@@ -86,7 +86,7 @@ class BestCompanies::CLI
      BestCompanies::Company.all[(input.to_i)-1].save?
     else
      BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
-     puts "This company does not have a review available"
+     puts "This company does not have a review available\n".colorize(:light_blue)
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
     end
