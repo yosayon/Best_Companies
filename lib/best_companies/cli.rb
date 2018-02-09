@@ -108,7 +108,7 @@ class BestCompanies::CLI
   puts "Industry:".colorize(:red) + " #{company.industry}"
   puts "Location:".colorize(:red) + " #{company.location}"
   puts "Review_URL:".colorize(:red) + " #{company.review_url}"
-  if company.review_url != "No Review Available"
+  if company.challenges != nil
    puts "Ratings:".colorize(:red)
    puts " Challenges:" + " #{company.challenges}"
    puts " Atmosphere:". + " #{company.atmosphere}"
