@@ -14,7 +14,7 @@ class BestCompanies::State
  end  
 
  def add_company(company)
-  @company << company.name unless @company.include?(company.name)
+  @company << company unless @company.include?(company)
  end
  
  def self.all
@@ -24,7 +24,7 @@ class BestCompanies::State
  def self.list_all_states
   puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
-  states.each{|s|puts "#{s.name}"}
+  states.each{|s|puts "#{s.name}".colorize(:red)}
   self.enter_state
  end
  
@@ -52,7 +52,7 @@ class BestCompanies::State
   validated_input = self.all.detect{|state|state.name == input}
   if validated_input != nil
    puts "-----------------------------------------"
-   validated_input.company.each{|company|puts "#{company}"}
+   validated_input.company.each{|company|puts "#{company.name}"}
    self.enter_state
   else
    puts "invalid input, please try again."
