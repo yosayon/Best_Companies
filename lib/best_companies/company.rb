@@ -35,8 +35,11 @@ class BestCompanies::Company
   puts "------------------------------------------------"
   self.all.slice(num1..num2).each do |company|
    puts "#{company.rank}: #{company.name}"
+   puts "Industry:".colorize(:red) + "#{company.industry}"
+   puts "Location:".colorize(:red) + "#{company.location}"
+   puts "Review_URL:".colorize(:red) + "#{company.review_url}"
+   puts "------------------------------------------------"
   end
-  puts "------------------------------------------------"
  end
   
  def add_awards(awards_array)
@@ -60,7 +63,6 @@ class BestCompanies::Company
  end
  
  def self.archive
-  puts "This is where it breaks."
   @@archive.each{|company|BestCompanies::CLI.see_company(company)}
  end
  
