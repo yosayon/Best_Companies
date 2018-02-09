@@ -91,17 +91,6 @@ class BestCompanies::CLI
     end
   end
  end
-
- def self.see_list(num1, num2)
-  BestCompanies::Company.all.slice(num1..num2).each do |company|
-    puts "\nRank: #{company.rank}"
-    puts "Name: #{company.name}"
-    puts "Industry: #{company.industry}"
-    puts "Location: #{company.location}"
-    puts "Review_URL: #{company.review_url}"
-    puts "------------------------------------------------"
-  end
- end
  
  def self.see_company(company)
   puts "\nRank:".colorize(:red) + " #{company.rank}"
