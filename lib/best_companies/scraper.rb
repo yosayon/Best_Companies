@@ -1,5 +1,4 @@
 class BestCompanies::Scraper
- attr_accessor :ranks, :names, :industries, :locations
  
  def self.scrape_companies(url)
   review_urls = Array.new
