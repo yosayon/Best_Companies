@@ -9,14 +9,15 @@ class BestCompanies::CLI
  
  def self.ask_user
   input = ""
-  puts "\nTo see the top 5 Best Companies please type 1-10".colorize(:light_blue)
+  puts "\n------------------------------------------------"
+  puts "To see the top 5 Best Companies please type 1-10".colorize(:light_blue)
   puts "To see the top 20 Best Companies please type 1-20".colorize(:light_blue)
   puts "To see the top 50 Best Companies please type 1-50".colorize(:light_blue)
   puts "To see the entire list of Best Companies please type 'see list'".colorize(:light_blue)
   puts "To enter in a custom range, type 'custom'".colorize(:light_blue)
   puts "To view best companies by state, type 'state'".colorize(:light_blue)
   puts "To exit type 'exit".colorize(:light_blue)
-   
+  puts "------------------------------------------------"
   input = gets.strip.to_s
   
   case input
@@ -52,6 +53,7 @@ class BestCompanies::CLI
  
  def self.see_ratings_and_awards
   puts "To view the ratings and awards for a company, enter the company rank".colorize(:light_blue)
+  puts "To enter in a custom range, type 'custom'".colorize(:light_blue)
   puts "Type menu to go back to the main menu".colorize(:light_blue)
   puts "Type archive to see your saved companies".colorize(:light_blue)
   puts "Type exit to exit".colorize(:light_blue)
@@ -64,6 +66,8 @@ class BestCompanies::CLI
    self.ask_user
   when "archive"
    BestCompanies::Company.archive
+  when "custom"
+   self.custom_list
   when "exit"
    exit
   else
@@ -74,9 +78,9 @@ class BestCompanies::CLI
  
  def self.validate_input(input)
   if !(input.to_i).between?(1,100)
-   puts "Your input was invalid. Please try again"
+   puts "Your input was invalid."
    puts "------------------------------------------------"
-   self.see_ratings_and_awards
+   self.ask_user
   else
    validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
     if validated_input != nil && validated_input.review_url != "No Review Available"
@@ -118,7 +122,9 @@ class BestCompanies::CLI
  end
 
  def self.custom_list
-  puts "Please enter your range between 1-100, separated by a dash. For example: 15-20"
+  puts "------------------------------------------------"
+  puts "Please enter your range between 1-100, separated by a dash. For example: 15-20".colorize(:light_blue)
+  puts "------------------------------------------------"
   input = gets.strip.split("-")
   num1 = (input[0].to_i)-1
   num2 = (input[1].to_i)-1
