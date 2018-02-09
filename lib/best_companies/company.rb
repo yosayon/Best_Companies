@@ -42,6 +42,7 @@ class BestCompanies::Company
    end
   else
    puts "You chose not to save this company".colorize(:light_blue)
+   puts "------------------------------------------------"
   end
  end
  
