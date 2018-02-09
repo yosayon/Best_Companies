@@ -57,9 +57,8 @@ class BestCompanies::CLI
     num1 = (input[0].to_i)-1
     num2 = (input[1].to-i)-1
     BestCompanies::Company.list_all(num1,num2)
-    #self.see_ratings_and_awards
    elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-     
+    
   # puts "That's not a valid input:"
   # self.ask_user
    else
@@ -120,24 +119,19 @@ class BestCompanies::CLI
   self.see_ratings_and_awards
  end
  
- def self.validate_input(input)
-  if !(input.to_i).between?(1,100)
-   puts "Your input was invalid."
-   puts "------------------------------------------------"
-   self.ask_user
-  else
-   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-    if validated_input != nil && validated_input.review_url != "No Review Available"
-     validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-     validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-     self.see_company(validated_input)
-     BestCompanies::Company.all[(input.to_i)-1].save?
-    else
-     BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
-     puts "This company does not have a review available\n".colorize(:light_blue)
-     BestCompanies::Company.all[(input.to_i)-1].save?
-     puts "------------------------------------------------"
-    end
+ def self.add_ratings_and_awards(input)
+  validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
+   if validated_input.review_url != "No Review Available"
+    validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+    validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
+    self.see_company(validated_input)
+    BestCompanies::Company.all[(input.to_i)-1].save?
+   else
+    BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
+    puts "This company does not have a review available\n".colorize(:light_blue)
+    BestCompanies::Company.all[(input.to_i)-1].save?
+    puts "------------------------------------------------"
+   end
   end
  end
  
@@ -161,23 +155,6 @@ class BestCompanies::CLI
   else
    puts "------------------------------------------------"
   end
- end
-
- #def self.custom_list
-  #puts "------------------------------------------------"
-  #puts "Please enter your range between 1-100, separated by a dash. For example: 15-20".colorize(:light_blue)
-  #puts "------------------------------------------------"
-  #input = gets.strip
-  #if input.match(/\d{1,}\-\d{1}/)
-  # input = input.split("-")
-  # num1 = (input[0].to_i)-1
-  # num2 = (input[1].to_i)-1
-  # BestCompanies::Company.list_all(num1,num2)
-  #else
-  # puts "------------------------------------------------"
-  # puts "That's an invalid range"
-  # self.custom_list
-  #end
  end
  
 end
