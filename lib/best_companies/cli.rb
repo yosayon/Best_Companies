@@ -53,8 +53,8 @@ class BestCompanies::CLI
  def self.see_ratings_and_awards
   puts "To view the ratings and awards for a company, enter the company rank".colorize(:light_blue)
   puts "Type menu to go back to the main menu".colorize(:light_blue)
-  puts "Type exit to exit".colorize(:light_blue)
   puts "Type archive to see your saved companies".colorize(:light_blue)
+  puts "Type exit to exit".colorize(:light_blue)
   puts "------------------------------------------------"
   
   input = gets.strip
