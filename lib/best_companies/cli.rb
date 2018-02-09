@@ -120,8 +120,6 @@ class BestCompanies::CLI
    company.awards.each{|award|puts " #{award}"}
    puts "------------------------------------------------"
   else
-   puts "No ratings".colorize(:red)
-   puts "No awards".colorize(:red)
    puts "------------------------------------------------"
   end
  end
