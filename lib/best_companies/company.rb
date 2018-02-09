@@ -39,6 +39,7 @@ class BestCompanies::Company
    else
     @@archive << self
     puts "This company has been saved to your archives!".colorize(:light_blue)
+    puts "------------------------------------------------"
    end
   else
    puts "You chose not to save this company".colorize(:light_blue)
@@ -55,9 +56,6 @@ class BestCompanies::Company
  end
  
   def self.list_all(num1=0,num2=99)
-   if num1 != Integer || num2 != Integer
-    puts "That's not a valid range."
-   else
    puts "------------------------------------------------"
    self.all.slice(num1..num2).each do |company|
    puts "#{company.rank}: #{company.name}"
@@ -65,7 +63,6 @@ class BestCompanies::Company
    puts "Location:".colorize(:red) + "#{company.location}"
    puts "Review_URL:".colorize(:red) + "#{company.review_url}"
    puts "------------------------------------------------"
-  end
  end
  end
  
