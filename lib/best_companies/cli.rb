@@ -10,7 +10,7 @@ class BestCompanies::CLI
  def self.ask_user
   input = ""
   puts "\n------------------------------------------------"
-  puts "To see the top 5 Best Companies please type 1-10".colorize(:light_blue)
+  puts "To see the top 10 Best Companies please type 1-10".colorize(:light_blue)
   puts "To see the top 20 Best Companies please type 1-20".colorize(:light_blue)
   puts "To see the top 50 Best Companies please type 1-50".colorize(:light_blue)
   puts "To see the entire list of Best Companies please type 'see list'".colorize(:light_blue)
@@ -125,10 +125,17 @@ class BestCompanies::CLI
   puts "------------------------------------------------"
   puts "Please enter your range between 1-100, separated by a dash. For example: 15-20".colorize(:light_blue)
   puts "------------------------------------------------"
-  input = gets.strip.split("-")
-  num1 = (input[0].to_i)-1
-  num2 = (input[1].to_i)-1
-  BestCompanies::Company.list_all(num1,num2)
+  input = gets.strip
+  if input.match(/\d{1,}\-\d{1}/)
+   input = input.split("-")
+   num1 = (input[0].to_i)-1
+   num2 = (input[1].to_i)-1
+   BestCompanies::Company.list_all(num1,num2)
+  else
+   puts "------------------------------------------------"
+   puts "That's an invalid range"
+   self.custom_list
+  end
  end
  
  def self.create_list
