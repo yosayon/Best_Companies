@@ -47,7 +47,11 @@ class BestCompanies::Company
  end
  
  def self.archive
+  if @@archive.size == 0
+   puts "There is nothing in your archive"
+  else
   @@archive.each{|company|BestCompanies::CLI.see_company(company)}
+  end
  end
  
   def self.list_all(num1=0,num2=99)
