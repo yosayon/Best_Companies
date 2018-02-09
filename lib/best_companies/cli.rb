@@ -99,16 +99,22 @@ class BestCompanies::CLI
   puts "Industry:".colorize(:red) + " #{company.industry}"
   puts "Location:".colorize(:red) + " #{company.location}"
   puts "Review_URL:".colorize(:red) + " #{company.review_url}"
-  puts "Ratings: \n"
-  puts " Challenges:".colorize(:red) + " #{company.challenges}"
-  puts " Atmosphere:".colorize(:red) + " #{company.atmosphere}"
-  puts " Rewards:".colorize(:red) + " #{company.rewards}"
-  puts " Pride:".colorize(:red) + " #{company.pride}"
-  puts " Communication:".colorize(:red) + " #{company.communication}"
-  puts " Bosses:".colorize(:red) + " #{company.bosses}"
-  puts "Awards: \n"
-  company.awards.each{|award|puts "#{award}".colorize(:green)}
-  puts "------------------------------------------------"
+  if company.review_url != "No Review Available"
+   puts "Ratings: \n"
+   puts " Challenges:".colorize(:red) + " #{company.challenges}"
+   puts " Atmosphere:".colorize(:red) + " #{company.atmosphere}"
+   puts " Rewards:".colorize(:red) + " #{company.rewards}"
+   puts " Pride:".colorize(:red) + " #{company.pride}"
+   puts " Communication:".colorize(:red) + " #{company.communication}"
+   puts " Bosses:".colorize(:red) + " #{company.bosses}"
+   puts "Awards: \n"
+   company.awards.each{|award|puts " #{award}".colorize(:green)}
+   puts "------------------------------------------------"
+  else
+   puts "No ratings".colorize(:red)
+   puts "No awards".colorize(:red)
+   puts "------------------------------------------------"
+  end
  end
 
  def self.custom_list
