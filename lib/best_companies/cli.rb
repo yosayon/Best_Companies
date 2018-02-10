@@ -58,10 +58,11 @@ class BestCompanies::CLI
      self.add_ratings_and_awards(input)
     end
   elsif input.match(/[A-Za-z]/)
-   state_input = BestCompanies::State.all.detect{|state|state.name == input}
-   if state_input != nil
-    state_input.companies.each{|company|see_company(company)}
-    self.enter_state
+   if BestCompanies::State.all.detect{|state|state.name == input} != nil
+    BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|see_company(company)}
+    self.enter_state_or_industry
+   elsif BestCompanies::Industry.all.detect{|industry|industry.name == input} != nil
+    BestCompanies::Industry.all.detect{|industry|industry.name == input}.companies.each{|company|see_company(company)}
    else
     self.reject_input
    end
