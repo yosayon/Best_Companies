@@ -15,6 +15,13 @@ module Persistable
   def self.extended(base)
    base.class_variable_set(:@@all,[])
   end
+  
+  def list
+   puts "-----------------------------------------"
+   output = self.all.sort{|a,b| a.name <=> b.name}
+   output.each{|i|puts "#{i.name}".colorize(:red)}
+   BestCompanies::CLI.enter_state_or_industry
+  end
  end
  
 end
