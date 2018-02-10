@@ -53,7 +53,7 @@ class BestCompanies::CLI
    end
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
     if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
-     puts "This company does not have a published review, please select another company."
+     puts "This company does not have a published review, please select another company.".colorize(:red)
     else
      self.add_ratings_and_awards(input)
     end
@@ -72,16 +72,16 @@ class BestCompanies::CLI
  end
  
  def self.reject_input
-  puts "Your input was rejected. Please type in a valid input."
+  puts "Your input was rejected. Please type in a valid input.".colorize(:red)
  end
  
  def self.enter_state_or_industry
   input = ""
   puts "------------------------------------------------"
   puts "Please enter the state or industry to view the list of companies".colorize(:light_blue)
-  puts "To see the list of states type 'see states'".colorize(:light_blue)
-  puts "To see the list of industries type 'see industries'".colorize(:light_blue)
-  puts "Type menu, to go back to the main menu".colorize(:light_blue)
+  puts "To see the list of states type ".colorize(:light_blue) + "see states".colorize(:red)
+  puts "To see the list of industries type ".colorize(:light_blue) + "see industries".colorize(:red)
+  puts "Type ".colorize(:light_blue) + "menu".colorize(:red) + ", to go back to the main menu".colorize(:light_blue)
   puts "------------------------------------------------"
   input = gets.strip
   case input
