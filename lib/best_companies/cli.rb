@@ -26,7 +26,9 @@ class BestCompanies::CLI
   case input
    when "see list"
    BestCompanies::Company.list_all(0,99)
-  when "state" || "industry"
+  when "state"
+   self.enter_state_or_industry
+  when "industry"
    self.enter_state_or_industry
   when "archive"
    BestCompanies::Company.archive
@@ -53,7 +55,9 @@ class BestCompanies::CLI
    end
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
     if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
-     puts "This company does not have a published review, please select another company.".colorize(:red)
+     puts "This company does not have a published review".colorize(:light_blue)
+     BestCompanies::Company.all[(input.to_i)-1].save?
+     puts "------------------------------------------------"
     else
      self.add_ratings_and_awards(input)
     end
