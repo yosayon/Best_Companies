@@ -87,11 +87,12 @@ class BestCompanies::CLI
   puts "Your input was rejected. Please type in a valid input."
  end
  
- def self.enter_state
+ def self.enter_state_or_industry
   input = ""
   puts "------------------------------------------------"
-  puts "Please enter the state to view the list of companies".colorize(:light_blue)
+  puts "Please enter the state or industry to view the list of companies".colorize(:light_blue)
   puts "To see the list of states again type 'see states'".colorize(:light_blue)
+  puts "To see the list of industries again type 'see industries'".colorize(:light_blue)
   puts "Type menu, to go back to the main menu".colorize(:light_blue)
   puts "------------------------------------------------"
   input = gets.strip
@@ -100,6 +101,8 @@ class BestCompanies::CLI
     self.ask_user
    when "see states"
     BestCompanies::State.list_all_states
+   when "see industries"
+    BestCompanies::Industry.list_all_industries
    when "exit"
     exit
    else
