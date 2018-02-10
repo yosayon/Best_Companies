@@ -25,39 +25,7 @@ class BestCompanies::State
   puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
   states.each{|s|puts "#{s.name}".colorize(:red)}
-  self.enter_state
- end
- 
- def self.enter_state
-  input = ""
-  puts "-----------------------------------------"
-  puts "Please enter the state to view the list of companies".colorize(:light_blue)
-  puts "To see the list of states again type 'see states'".colorize(:light_blue)
-  puts "Type menu, to go back to the main menu".colorize(:light_blue)
-  puts "------------------------------------------"
-  input = gets.strip
-  case input
-   when "menu"
-    BestCompanies::CLI.ask_user
-   when "see states"
-    self.list_all_states
-   when "exit"
-    exit
-   else
-    self.validate_input(input)
-  end
- end
-   
- def self.validate_input(input)
-  validated_input = self.all.detect{|state|state.name == input}
-  if validated_input != nil
-   puts "-----------------------------------------"
-   validated_input.company.each{|company|puts "#{company.rank}: #{company.name}"}
-   self.enter_state
-  else
-   puts "invalid input, please try again."
-   self.enter_state
-  end
+  BestCompanies::CLI.enter_state
  end
  
 end
