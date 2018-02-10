@@ -21,7 +21,7 @@ class BestCompanies::Scraper
    end
   end
    review_urls
-  end
+ end
  
  def self.create_company_hash(ranks,names,industries,locations,review_urls)
   companies = Array.new
@@ -38,7 +38,6 @@ class BestCompanies::Scraper
   end
   companies
  end
- 
 
  def self.scrape_ratings(url)
   ratings = Hash.new
