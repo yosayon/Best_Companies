@@ -54,16 +54,7 @@ class BestCompanies::CLI
    else
     self.reject_input
    end
-   #validate review_urls here before adding ratings and awards
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-   #first I should probably either validate the url in this method or create another method and call it here....let's try the first one.
-   #If the input is '5' then we should look at the class variable '@@all' to select the company ranked 5.
-   #let's bind pry to see if this reveals the url. -- it works!
-   #let's check if it's a valid url by utilizing the Faraday gem!
-   #should i create another variable?....maybe no.
-   #404 means the page cannot be found/200 means its a legitimate page and can be found.
-   #let's try running the console again to see if this validation works on 404 and 200.
-   #it works!
     if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
      puts "This company does not have a published review, please select another company."
     else
@@ -72,7 +63,6 @@ class BestCompanies::CLI
   elsif input.match(/[A-Za-z]/)
    state_input = BestCompanies::State.all.detect{|state|state.name == input}
    if state_input != nil
-    #puts "------------------------------------------------"
     state_input.companies.each{|company|see_company(company)}
     self.enter_state
    else
