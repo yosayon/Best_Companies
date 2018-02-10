@@ -17,6 +17,7 @@ class BestCompanies::CLI
   puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format For Ex: 15-20".colorize(:light_blue)
   puts "To view the ratings and awards for a company, enter the company rank (1-100). For Ex: 5".colorize(:light_blue)
   puts "To view best companies by state, type 'state'".colorize(:light_blue)
+  puts "To view the best companies by Industry, type 'industry'".colorize(:light_blue)
   puts "Type archive to see your saved companies".colorize(:light_blue)
   puts "To exit type exit".colorize(:light_blue)
   puts "------------------------------------------------"
@@ -28,6 +29,8 @@ class BestCompanies::CLI
    BestCompanies::Company.list_all(0,99)
   when "state"
    BestCompanies::State.list_all_states
+  when "industry"
+   BestCompanies::Industry.list_all_industries
   when "archive"
    BestCompanies::Company.archive
   when "exit"
