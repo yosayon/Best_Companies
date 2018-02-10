@@ -78,8 +78,8 @@ class BestCompanies::CLI
   input = ""
   puts "------------------------------------------------"
   puts "Please enter the state or industry to view the list of companies".colorize(:light_blue)
-  puts "To see the list of states again type 'see states'".colorize(:light_blue)
-  puts "To see the list of industries again type 'see industries'".colorize(:light_blue)
+  puts "To see the list of states type 'see states'".colorize(:light_blue)
+  puts "To see the list of industries type 'see industries'".colorize(:light_blue)
   puts "Type menu, to go back to the main menu".colorize(:light_blue)
   puts "------------------------------------------------"
   input = gets.strip
