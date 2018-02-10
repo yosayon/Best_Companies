@@ -13,7 +13,6 @@ class BestCompanies::CLI
  end
  
  def self.ask_user
-  input = ""
   puts "To see the entire list of Best Companies please type 'see list'".colorize(:light_blue)
   puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format For Ex: 15-20".colorize(:light_blue)
   puts "To view the ratings and awards for a company, enter the company rank (1-100). For Ex: 5".colorize(:light_blue)
