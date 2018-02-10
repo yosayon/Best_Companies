@@ -14,10 +14,10 @@ class BestCompanies::Scraper
  
  def self.check_urls(review_urls)
   review_urls.map! do |url|
-   if Faraday.get(url).status == 404
-    url = "No Review Available"
+   if Faraday.get(url).status == 200
+    url
    else
-    break
+    url = "No Review Available"
    end
   end
    review_urls
