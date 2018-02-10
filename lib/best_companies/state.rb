@@ -6,7 +6,6 @@ class BestCompanies::State
  
  attr_accessor :name
  attr_reader :company
- @@all = []
  
  def initialize(name)
   @name = name
@@ -22,6 +21,7 @@ class BestCompanies::State
  end
  
  def self.list_all_states
+  binding.pry
   puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
   states.each{|s|puts "#{s.name}".colorize(:red)}
