@@ -14,7 +14,6 @@ class BestCompanies::CLI
  
  def self.ask_user
   input = ""
-  puts "\n------------------------------------------------"
   puts "To see the entire list of Best Companies please type 'see list'".colorize(:light_blue)
   puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format For Ex: 15-20".colorize(:light_blue)
   puts "To view the ratings and awards for a company, enter the company rank (1-100). For Ex: 5".colorize(:light_blue)
@@ -47,14 +46,14 @@ class BestCompanies::CLI
   if input.match(/\d{1,}\-\d{1}/)
    input = input.split("-")
    num1 = (input[0].to_i)-1
-   num2 = (input[1].to-i)-1
+   num2 = (input[1].to_i)-1
    if num1 < num2 && num2.between?(1,100)
     BestCompanies::Company.list_all(num1,num2)
    else
     self.reject_input
    end
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-   self.add_ratings_and_awards
+   self.add_ratings_and_awards(input)
   else
    self.reject_input
   end
