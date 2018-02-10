@@ -16,11 +16,11 @@ class BestCompanies::State
   @@all
  end
  
- def self.list_all_states
-  puts "-----------------------------------------"
-  states = self.all.sort{|a,b| a.name <=> b.name}
-  states.each{|s|puts "#{s.name}".colorize(:red)}
-  BestCompanies::CLI.enter_state_or_industry
- end
+ #def self.list_all_states
+ # puts "-----------------------------------------"
+ # states = self.all.sort{|a,b| a.name <=> b.name}
+ # states.each{|s|puts "#{s.name}".colorize(:red)}
+ # BestCompanies::CLI.enter_state_or_industry
+ #end
  
 end
