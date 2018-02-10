@@ -5,23 +5,18 @@ class BestCompanies::State
  include Persistable::InstanceMethods
  
  attr_accessor :name
- attr_reader :company
+ attr_reader :companies
  
  def initialize(name)
   @name = name
-  @company = []
+  @companies = []
  end  
-
- def add_company(company)
-  @company << company unless @company.include?(company)
- end
  
  def self.all
   @@all
  end
  
  def self.list_all_states
-  binding.pry
   puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
   states.each{|s|puts "#{s.name}".colorize(:red)}
