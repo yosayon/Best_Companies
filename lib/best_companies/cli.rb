@@ -92,9 +92,9 @@ class BestCompanies::CLI
    when "menu"
     self.ask_user
    when "see states"
-    BestCompanies::State.list_all_states
+    BestCompanies::State.list
    when "see industries"
-    BestCompanies::Industry.list_all_industries
+    BestCompanies::Industry.list
    when "exit"
     exit
    else
