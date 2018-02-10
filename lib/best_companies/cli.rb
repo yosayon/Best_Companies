@@ -70,7 +70,7 @@ class BestCompanies::CLI
    state_input = BestCompanies::State.all.detect{|state|state.name == input}
    if state_input != nil
     #puts "------------------------------------------------"
-    state_input.company.each{|company|see_company(company)}
+    state_input.companies.each{|company|see_company(company)}
     self.enter_state
    else
     self.reject_input
