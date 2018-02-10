@@ -104,17 +104,11 @@ class BestCompanies::CLI
  
  def self.add_ratings_and_awards(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
-   if validated_input.review_url != "No Review Available"
-    validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
-    validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-    self.see_company(validated_input)
-    BestCompanies::Company.all[(input.to_i)-1].save?
-   else
-    BestCompanies::Company.list_all((input.to_i)-1,(input.to_i)-1)
-    puts "This company does not have a review available\n".colorize(:light_blue)
-    BestCompanies::Company.all[(input.to_i)-1].save?
-    puts "------------------------------------------------"
-   end
+  validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
+  validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
+  self.see_company(validated_input)
+  BestCompanies::Company.all[(input.to_i)-1].save?
+  puts "------------------------------------------------"
  end
  
  def self.see_company(company)
