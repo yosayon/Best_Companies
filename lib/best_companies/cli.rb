@@ -22,12 +22,11 @@ class BestCompanies::CLI
   puts "Type archive to see your saved companies".colorize(:light_blue)
   puts "To exit type exit".colorize(:light_blue)
   puts "------------------------------------------------"
+  
   input = gets.strip.to_s
   
-  self.validate_input(input)
-  
   case input
-  when "see list"
+   when "see list"
    BestCompanies::Company.list_all(0,99)
   when "state"
    BestCompanies::State.list_all_states
@@ -36,18 +35,7 @@ class BestCompanies::CLI
   when "exit"
    exit
   else
-   if input.match(/\d{1,}\-\d{1}/)
-    input = input.split("-")
-    num1 = (input[0].to_i)-1
-    num2 = (input[1].to-i)-1
-    BestCompanies::Company.list_all(num1,num2)
-   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-    
-  # puts "That's not a valid input:"
-  # self.ask_user
-   else
-    puts "That's an invalid input. Please try again."
-   end
+   self.validate_input(input)
   end
   
   while input != "exit"
@@ -57,51 +45,25 @@ class BestCompanies::CLI
  
  def self.validate_input(input)
   if input.match(/\d{1,}\-\d{1}/)
-    input = input.split("-")
-    num1 = (input[0].to_i)-1
-    num2 = (input[1].to-i)-1
-    if num1 < num2 && num2.between?(1,100)
-     BestCompanies::Company.list_all(num1,num2)
-    else
-     self.reject_input
-    end
-   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-    self.add_ratings_and_awards
+   input = input.split("-")
+   num1 = (input[0].to_i)-1
+   num2 = (input[1].to-i)-1
+   if num1 < num2 && num2.between?(1,100)
+    BestCompanies::Company.list_all(num1,num2)
    else
     self.reject_input
+   end
+  elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
+   self.add_ratings_and_awards
+  else
+   self.reject_input
   end
  end
  
  def self.reject_input
   puts "Your input sucks and you should input something else."
-  self.ask_user
  end
  
- def self.see_ratings_and_awards
-  #puts "To view the ratings and awards for a company, enter the company rank".colorize(:light_blue)
-  #puts "To enter in a custom range, type 'custom'".colorize(:light_blue)
-  puts "Type menu to go back to the main menu".colorize(:light_blue)
-  puts "Type archive to see your saved companies".colorize(:light_blue)
-  puts "Type exit to exit".colorize(:light_blue)
-  puts "------------------------------------------------"
-  
-  input = gets.strip
-  
-  
-  case input
-  when "menu"
-   self.ask_user
-  when "archive"
-   BestCompanies::Company.archive
-  when "custom"
-   self.custom_list
-  when "exit"
-   exit
-  else
-   self.validate_input(input)
-  end
-  self.see_ratings_and_awards
- end
  
  def self.add_ratings_and_awards(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
@@ -111,12 +73,11 @@ class BestCompanies::CLI
     self.see_company(validated_input)
     BestCompanies::Company.all[(input.to_i)-1].save?
    else
-    BestCompanies::Company.list_all((input.to_i)-1, (input.to_i)-1)
+    BestCompanies::Company.list_all((input.to_i)-1,(input.to_i)-1)
     puts "This company does not have a review available\n".colorize(:light_blue)
     BestCompanies::Company.all[(input.to_i)-1].save?
     puts "------------------------------------------------"
    end
-  end
  end
  
  def self.see_company(company)
