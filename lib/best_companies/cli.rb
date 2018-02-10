@@ -54,6 +54,15 @@ class BestCompanies::CLI
    end
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
    self.add_ratings_and_awards(input)
+  elsif input.match(/[A-Za-z]/)
+   state_input = BestCompanies::State.all.detect{|state|state.name == input}
+   if state_input != nil
+    #puts "------------------------------------------------"
+    state_input.company.each{|company|see_company(company)}
+    self.enter_state
+   else
+    self.reject_input
+   end
   else
    self.reject_input
   end
@@ -63,6 +72,25 @@ class BestCompanies::CLI
   puts "Your input sucks and you should input something else."
  end
  
+ def self.enter_state
+  input = ""
+  puts "------------------------------------------------"
+  puts "Please enter the state to view the list of companies".colorize(:light_blue)
+  puts "To see the list of states again type 'see states'".colorize(:light_blue)
+  puts "Type menu, to go back to the main menu".colorize(:light_blue)
+  puts "------------------------------------------------"
+  input = gets.strip
+  case input
+   when "menu"
+    self.ask_user
+   when "see states"
+    BestCompanies::State.list_all_states
+   when "exit"
+    exit
+   else
+    self.validate_input(input)
+  end
+ end
  
  def self.add_ratings_and_awards(input)
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
