@@ -17,7 +17,10 @@ class BestCompanies::Industry
  end
  
  def self.list_all_industries
-  self.all.each{|industry| puts "Industry: #{industry.name}"}
+  puts "-----------------------------------------"
+  industries = self.all.sort{|a,b| a.name <=> b.name}
+  industries.each{|s|puts "#{s.name}".colorize(:red)}
+  BestCompanies::CLI.enter_state_or_industry
  end
  
 end

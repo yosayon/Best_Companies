@@ -20,7 +20,7 @@ class BestCompanies::State
   puts "-----------------------------------------"
   states = self.all.sort{|a,b| a.name <=> b.name}
   states.each{|s|puts "#{s.name}".colorize(:red)}
-  BestCompanies::CLI.enter_state
+  BestCompanies::CLI.enter_state_or_industry
  end
  
 end
