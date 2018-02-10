@@ -21,6 +21,7 @@ class BestCompanies::Scraper
    end
   end
    review_urls
+   binding.pry
  end
  
  def self.create_company_hash(ranks,names,industries,locations,review_urls)
