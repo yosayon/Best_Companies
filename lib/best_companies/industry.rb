@@ -5,14 +5,11 @@ class BestCompanies::Industry
  include Persistable::InstanceMethods
  
  attr_accessor :name
+ attr_reader :companies
   
  def initialize(name)
   @name = name
-  @company = []
- end
- 
- def add_company(company)
-  @company << company.name unless @company.include?(company.name)
+  @companies = []
  end
   
  def self.all
