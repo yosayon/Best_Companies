@@ -5,7 +5,6 @@ class BestCompanies::Industry
  include Persistable::InstanceMethods
  
  attr_accessor :name
- @@all = []
   
  def initialize(name)
   @name = name
