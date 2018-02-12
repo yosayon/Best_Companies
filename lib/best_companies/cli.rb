@@ -46,9 +46,11 @@ class BestCompanies::CLI
  def self.validate_input(input)
   if input.match(/\d{1,}\-\d{1}/)
    input = input.split("-")
-   num1 = (input[0].to_i)-1
-   num2 = (input[1].to_i)-1
-   if num1 < num2 && num2.between?(1,100)
+   num1 = (input[0].to_i)
+   num2 = (input[1].to_i)
+   if num1 < num2 && num1 > 0 && num2.between?(1,100)
+    num1 = num1 - 1
+    num2 = num2 - 1
     BestCompanies::Company.list_all(num1,num2)
    else
     self.reject_input
@@ -56,6 +58,7 @@ class BestCompanies::CLI
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
     if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
      puts "This company does not have a published review".colorize(:light_blue)
+     self.see_company(BestCompanies::Company.all[(input.to_i)])
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
     else
