@@ -85,7 +85,7 @@ class BestCompanies::CLI
  def self.enter_state_or_industry
   input = ""
   puts "------------------------------------------------"
-  puts "Please enter the state or industry to view the list of companies".colorize(:light_blue)
+  #puts "Please enter the state or industry to view the list of companies".colorize(:light_blue)
   puts "To see the list of states type ".colorize(:light_blue) + "see states".colorize(:red)
   puts "To see the list of industries type ".colorize(:light_blue) + "see industries".colorize(:red)
   puts "Type ".colorize(:light_blue) + "menu".colorize(:red) + ", to go back to the main menu".colorize(:light_blue)
@@ -96,13 +96,18 @@ class BestCompanies::CLI
     self.ask_user
    when "see states"
     BestCompanies::State.list
+    self.get_input
    when "see industries"
     BestCompanies::Industry.list
+    self.enter_state_or_industry
    when "exit"
     exit
    else
     self.validate_input(input)
   end
+ end
+ 
+ def self.get_input
  end
  
  def self.add_ratings_and_awards(input)
