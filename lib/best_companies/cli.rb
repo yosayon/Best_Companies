@@ -58,7 +58,7 @@ class BestCompanies::CLI
   elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
     if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
      puts "This company does not have a published review".colorize(:light_blue)
-     self.see_company(BestCompanies::Company.all[(input.to_i)])
+     self.see_company(BestCompanies::Company.all[(input.to_i)-1])
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
     else
