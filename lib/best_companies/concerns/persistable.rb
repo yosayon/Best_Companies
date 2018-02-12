@@ -19,7 +19,7 @@ module Persistable
   def list
    puts "-----------------------------------------"
    output = self.all.sort{|a,b| a.name <=> b.name}
-   output.each{|i|puts "#{i.name}".colorize(:red)}
+   output.each.with_index(1){|v,i|puts "#{i}: #{i.name}".colorize(:red)}
    BestCompanies::CLI.enter_state_or_industry
   end
  end
