@@ -20,8 +20,13 @@ module Persistable
    puts "-----------------------------------------"
    output = self.all.sort{|a,b| a.name <=> b.name}
    output.each.with_index(1){|v,i|puts "#{i}: #{v.name}".colorize(:red)}
-   BestCompanies::CLI.enter_state_or_industry
   end
  end
+ 
+  def check_input(input)
+   if input.match(/\d{1,}/) && input.to_i.between?(1,self.all.size)
+    BestCompanies::self.all.detect{|v|v.name == input}.companies.each{|v|BestCompanies::CLI.see_company(v)}
+   end
+  end
  
 end
