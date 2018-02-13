@@ -21,12 +21,15 @@ module Persistable
    output = self.all.sort{|a,b| a.name <=> b.name}
    output.each.with_index(1){|v,i|puts "#{i}: #{v.name}".colorize(:red)}
   end
- end
  
   def check_input(input)
    if input.match(/\d{1,}/) && input.to_i.between?(1,self.all.size)
-    BestCompanies::self.all.detect{|v|v.name == input}.companies.each{|v|BestCompanies::CLI.see_company(v)}
+    self.all.sort{|a,b| a.name <=> b.name}[(input.to_i)-1].companies.each{|v|BestCompanies::CLI.see_company(v)}
+   else
+    puts "Your input was invalid. Please try again."
+    BestCompanies::CLI.get_input
    end
   end
+ end
  
 end
