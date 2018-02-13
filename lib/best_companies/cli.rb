@@ -26,10 +26,12 @@ class BestCompanies::CLI
   case input
    when "see list"
    BestCompanies::Company.list_all(0,99)
-  when "state"
-   self.enter_state_or_industry
-  when "industry"
-   self.enter_state_or_industry
+  when "see state"
+   BestCompanies::State.list
+   BestCompanies::State.check_input(self.get_input)
+  when "see industry"
+   BestCompanies::Industry.list
+   BestCompanies::Industry.check_input(self.get_input)
   when "archive"
    BestCompanies::Company.archive
   when "exit"
