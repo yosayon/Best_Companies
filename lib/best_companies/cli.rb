@@ -96,9 +96,11 @@ class BestCompanies::CLI
     self.ask_user
    when "see states"
     BestCompanies::State.list
-    self.get_input
+    BestCompanies::State.check_input(self.get_input)
+    self.enter_state_or_industry
    when "see industries"
     BestCompanies::Industry.list
+    BestCompanies::Industry.check_input(self.get_input)
     self.enter_state_or_industry
    when "exit"
     exit
@@ -108,6 +110,10 @@ class BestCompanies::CLI
  end
  
  def self.get_input
+  puts "------------------------------------------------"
+  puts "Please enter in the number to view by state/industry"
+  input = gets.strip
+  input
  end
  
  def self.add_ratings_and_awards(input)
