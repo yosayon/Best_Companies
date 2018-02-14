@@ -25,8 +25,10 @@ module Persistable
   def check_input(input)
    if input.match(/\d{1,}/) && input.to_i.between?(1,self.all.size)
     self.all.sort{|a,b| a.name <=> b.name}[(input.to_i)-1].companies.each{|v|BestCompanies::CLI.see_company(v)}
+   elsif input == "menu"
+   BestCompanies::CLI.ask_user
    else
-    puts "Your input was invalid. Please try again."
+    BestCompanies::CLI.reject_input
     BestCompanies::CLI.get_input
    end
   end

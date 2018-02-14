@@ -86,7 +86,8 @@ class BestCompanies::CLI
  
  def self.get_input
   puts "------------------------------------------------"
-  puts "Please enter in the number to view by state/industry"
+  puts "Please enter in the number to view by state/industry, then type in the rank of any company to view the ratings and awards"
+  puts "To go back to the main menu, type " + "menu".colorize(:red)
   input = gets.strip
   input
  end
