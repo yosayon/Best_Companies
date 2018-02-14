@@ -15,7 +15,7 @@ class BestCompanies::CLI
  def self.ask_user
   puts "To see the entire list of Best Companies please type ".colorize(:light_blue) + "see list".colorize(:red)
   puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format. ".colorize(:light_blue) + "For Ex: 15-20".colorize(:red)
-  puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 5".colorize(:red)
+  puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'".colorize(:red)
   puts "To view best companies by state or industry, type ".colorize(:light_blue) + "see states".colorize(:red) + " or ".colorize(:light_blue) + "see industries".colorize(:red)
   puts "To view your saved companies, type ".colorize(:light_blue) + "archive".colorize(:red)
   puts "To exit type ".colorize(:light_blue) + "exit".colorize(:red)
@@ -57,15 +57,16 @@ class BestCompanies::CLI
    else
     self.reject_input
    end
-  elsif input.match(/\d{1,}/) && input.to_i.between?(1,100)
-    if Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
+  elsif input.match(/(rank)\s\d{1,}/) 
+   input = input.split(" ")[1]
+   if input.to_i.between?(1,100) && Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
      puts "This company does not have a published review".colorize(:light_blue)
      self.see_company(BestCompanies::Company.all[(input.to_i)-1])
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
     else
      self.add_ratings_and_awards(input)
-    end
+   end
   elsif input.match(/[A-Za-z]/)
    if BestCompanies::State.all.detect{|state|state.name == input} != nil
     BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|see_company(company)}
