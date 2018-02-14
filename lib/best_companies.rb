@@ -20,8 +20,6 @@ require_relative '../lib/best_companies/scraper'
 require_relative '../lib/best_companies/state'
 
 
-
-
 puts "loading your environment..."
 
 BestCompanies::CLI.start
