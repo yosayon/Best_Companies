@@ -26,10 +26,10 @@ class BestCompanies::CLI
   case input
    when "see list"
    BestCompanies::Company.list_all(0,99)
-  when "see state"
+  when "see states"
    BestCompanies::State.list
    BestCompanies::State.check_input(self.get_input)
-  when "see industry"
+  when "see industries"
    BestCompanies::Industry.list
    BestCompanies::Industry.check_input(self.get_input)
   when "archive"
@@ -84,32 +84,32 @@ class BestCompanies::CLI
   puts "Your input was rejected. Please type in a valid input.".colorize(:red)
  end
  
- def self.enter_state_or_industry
-  input = ""
-  puts "------------------------------------------------"
-  puts "To see the list of states type ".colorize(:light_blue) + "see states".colorize(:red)
-  puts "To see the list of industries type ".colorize(:light_blue) + "see industries".colorize(:red)
-  puts "Type ".colorize(:light_blue) + "menu".colorize(:red) + ", to go back to the main menu".colorize(:light_blue)
-  puts "------------------------------------------------"
-  input = gets.strip
-  case input
-   when "menu"
-    self.ask_user
-   when "see states"
-    BestCompanies::State.list
-    BestCompanies::State.check_input(self.get_input)
-    self.enter_state_or_industry
-   when "see industries"
-    BestCompanies::Industry.list
-    BestCompanies::Industry.check_input(self.get_input)
-    self.enter_state_or_industry
-   when "exit"
-    exit
-   else
-    self.validate_input(input)
-  end
- end
- 
+# def self.enter_state_or_industry
+#  input = ""
+#  puts "------------------------------------------------"
+#  puts "To see the list of states type ".colorize(:light_blue) + "see states".colorize(:red)
+#  puts "To see the list of industries type ".colorize(:light_blue) + "see industries".colorize(:red)
+#  puts "Type ".colorize(:light_blue) + "menu".colorize(:red) + ", to go back to the main menu".colorize(:light_blue)
+#  puts "------------------------------------------------"
+#  input = gets.strip
+#  case input
+#   when "menu"
+#    self.ask_user
+#   when "see states"
+#    BestCompanies::State.list
+#    BestCompanies::State.check_input(self.get_input)
+#    self.enter_state_or_industry
+#   when "see industries"
+#    BestCompanies::Industry.list
+#    BestCompanies::Industry.check_input(self.get_input)
+#    self.enter_state_or_industry
+#   when "exit"
+#    exit
+#   else
+#    self.validate_input(input)
+#  end
+# end
+# 
  def self.get_input
   puts "------------------------------------------------"
   puts "Please enter in the number to view by state/industry"
