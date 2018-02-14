@@ -46,6 +46,7 @@ class BestCompanies::CLI
  end
  
  def self.validate_input(input)
+  #if your input is a range
   if input.match(/\d{1,}\-\d{1}/)
    input = input.split("-")
    num1 = (input[0].to_i)
@@ -57,6 +58,7 @@ class BestCompanies::CLI
    else
     self.reject_input
    end
+  #if your input is calling out a rank
   elsif input.match(/(rank)\s\d{1,}/) 
    input = input.split(" ")[1]
    if input.to_i.between?(1,100) && Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
@@ -67,10 +69,10 @@ class BestCompanies::CLI
     else
      self.add_ratings_and_awards(input)
    end
+  #if your input is a state or industry
   elsif input.match(/[A-Za-z]/)
    if BestCompanies::State.all.detect{|state|state.name == input} != nil
     BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|see_company(company)}
-    self.enter_state_or_industry
    elsif BestCompanies::Industry.all.detect{|industry|industry.name == input} != nil
     BestCompanies::Industry.all.detect{|industry|industry.name == input}.companies.each{|company|see_company(company)}
    else
@@ -87,8 +89,8 @@ class BestCompanies::CLI
  
  def self.get_input
   puts "------------------------------------------------"
-  puts "Please enter in the number to view by state/industry, then type in the rank of any company to view the ratings and awards"
-  puts "To go back to the main menu, type " + "menu".colorize(:red)
+  puts "Please enter in the number to view companies by state/industry.".colorize(:light_blue)
+  puts "To go back to the main menu, type ".colorize(:light_blue) + "menu".colorize(:red)
   input = gets.strip
   input
  end
