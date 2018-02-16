@@ -29,7 +29,7 @@ module Persistable
    BestCompanies::CLI.ask_user
    else
     BestCompanies::CLI.reject_input
-    BestCompanies::CLI.get_input
+    self.check_input(BestCompanies::CLI.get_input)
    end
   end
  end

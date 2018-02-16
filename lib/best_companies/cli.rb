@@ -1,14 +1,22 @@
 class BestCompanies::CLI
- BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/2017"
+ BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/"
     
  def self.start
   puts "\nWelcome!".bold
-  create_list
-  ask_user
+  puts "Do you want to view the 2017 or 2018 Fortune list? Type the year."
+  year = gets.strip
+  #binding.pry
+  if year == "2017" || year == "2018"
+   create_list(year)
+   ask_user
+  else
+   self.reject_input
+   self.start
+  end
  end
  
- def self.create_list
-  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH)
+ def self.create_list(year)
+  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH + year)
   BestCompanies::Company.create_from_list(company_hash)
  end
  
