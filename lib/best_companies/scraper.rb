@@ -1,6 +1,6 @@
 class BestCompanies::Scraper
  
- def self.scrape_companies(url)
+ def self.scrape_companies(url,year)
   review_urls = Array.new
   doc = Nokogiri::HTML(open(url))
    ranks = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .rank").text.split(" ")
@@ -8,15 +8,16 @@ class BestCompanies::Scraper
    industries = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .industry").text.split("\n").map{|i|i.gsub(/\s{2}/,"")}.slice(1,100)
    locations = doc.css(".container #list-detail-left-column div.row.company .col-md-5 .location").text.split("\n").map{|l|l.gsub(/\s{2}/,"")}.slice(1,100)
    review_urls = doc.css(".container .col-xs-12 .col-md-5 a.review-link[href]").map{|l|l["href"]}
-   self.create_company_hash(ranks,names,industries,locations,review_urls)
+   self.create_company_hash(year,ranks,names,industries,locations,review_urls)
  end
  
- def self.create_company_hash(ranks,names,industries,locations,review_urls)
+ def self.create_company_hash(year,ranks,names,industries,locations,review_urls)
   companies = Array.new
   count = 0
   while count < 100
    companies << 
-   {:rank => ranks[count],
+   {:year => year
+    :rank => ranks[count],
     :name => names[count],
     :industry => industries[count],
     :location => locations[count],

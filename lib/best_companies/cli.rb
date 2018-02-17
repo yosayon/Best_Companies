@@ -16,7 +16,7 @@ class BestCompanies::CLI
  end
  
  def self.create_list(year)
-  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH + year)
+  company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH + year, year)
   BestCompanies::Company.create_from_list(company_hash)
  end
  
