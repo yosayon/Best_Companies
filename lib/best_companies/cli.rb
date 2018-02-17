@@ -5,7 +5,6 @@ class BestCompanies::CLI
   puts "\nWelcome!".bold
   puts "Do you want to view the 2017 or 2018 Fortune list? Type the year."
   year = gets.strip
-  #binding.pry
   if year == "2017" || year == "2018"
    create_list(year)
    ask_user
@@ -114,6 +113,7 @@ class BestCompanies::CLI
  
  def self.see_company(company)
   puts "\nRank:".colorize(:red) + " #{company.rank}"
+  puts "Year:".colorize(:red) + "#{company.year}"
   puts "Name:".colorize(:red) + " #{company.name}"
   puts "Industry:".colorize(:red) + " #{company.industry}"
   puts "Location:".colorize(:red) + " #{company.location}"
