@@ -16,7 +16,7 @@ class BestCompanies::Scraper
   count = 0
   while count < 100
    companies << 
-   {:year => year
+   {:year => year,
     :rank => ranks[count],
     :name => names[count],
     :industry => industries[count],
