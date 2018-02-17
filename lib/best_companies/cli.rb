@@ -25,6 +25,7 @@ class BestCompanies::CLI
   puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'".colorize(:red)
   puts "To view best companies by state or industry, type ".colorize(:light_blue) + "see states".colorize(:red) + " or ".colorize(:light_blue) + "see industries".colorize(:red)
   puts "To view your saved companies, type ".colorize(:light_blue) + "archive".colorize(:red)
+  puts "To switch years please type ".colorize(:light_blue) + "'switch list'".colorize(:red)
   puts "To exit type ".colorize(:light_blue) + "exit".colorize(:red)
   puts "------------------------------------------------"
   
@@ -41,6 +42,8 @@ class BestCompanies::CLI
    BestCompanies::Industry.check_input(self.get_input)
   when "archive"
    BestCompanies::Company.archive
+  when "switch list"
+   self.start
   when "exit"
    exit
   else
