@@ -14,6 +14,22 @@ class BestCompanies::CLI
   end
  end
  
+ def self.switch_year(year)
+  if year == "2017"
+   BestCompanies::Company.all.clear
+   BestCompanies::Industry.all.clear
+   BestCompanies::State.all.clear
+   self.create_list("2017")
+   self.ask_user
+  else
+   BestCompanies::Company.all.clear
+   BestCompanies::Industry.all.clear
+   BestCompanies::State.all.clear
+   self.create_list("2018")
+   self.ask_user
+  end
+ end
+ 
  def self.create_list(year)
   company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH + year, year)
   BestCompanies::Company.create_from_list(company_hash)
@@ -25,7 +41,7 @@ class BestCompanies::CLI
   puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'".colorize(:red)
   puts "To view best companies by state or industry, type ".colorize(:light_blue) + "see states".colorize(:red) + " or ".colorize(:light_blue) + "see industries".colorize(:red)
   puts "To view your saved companies, type ".colorize(:light_blue) + "archive".colorize(:red)
-  puts "To switch years please type ".colorize(:light_blue) + "'switch list'".colorize(:red)
+  puts "To switch years please type ".colorize(:light_blue) + "2017 or 2018".colorize(:red)
   puts "To exit type ".colorize(:light_blue) + "exit".colorize(:red)
   puts "------------------------------------------------"
   
@@ -42,8 +58,10 @@ class BestCompanies::CLI
    BestCompanies::Industry.check_input(self.get_input)
   when "archive"
    BestCompanies::Company.archive
-  when "switch list"
-   self.start
+  when "2017"
+   self.switch_year("2017")
+  when "2018"
+   self.switch_year("2018")
   when "exit"
    exit
   else
@@ -56,7 +74,6 @@ class BestCompanies::CLI
  end
  
  def self.validate_input(input)
-  #if your input is a range
   if input.match(/\d{1,}\-\d{1}/)
    input = input.split("-")
    num1 = (input[0].to_i)
@@ -68,7 +85,6 @@ class BestCompanies::CLI
    else
     self.reject_input
    end
-  #if your input is calling out a rank
   elsif input.match(/(rank)\s\d{1,}/) 
    input = input.split(" ")[1]
    if input.to_i.between?(1,100) && Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
@@ -79,7 +95,6 @@ class BestCompanies::CLI
     else
      self.add_ratings_and_awards(input)
    end
-  #if your input is a state or industry
   elsif input.match(/[A-Za-z]/)
    if BestCompanies::State.all.detect{|state|state.name == input} != nil
     BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|see_company(company)}

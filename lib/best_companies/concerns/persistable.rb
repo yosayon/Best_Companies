@@ -34,4 +34,7 @@ module Persistable
   end
  end
  
+  def remove_all
+   self.all.clear
+  end
 end
