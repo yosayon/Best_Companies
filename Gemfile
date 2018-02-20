@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) {|repo_name| "https://github.com/yosayon#{Best_Companies}" }
 
-# Specify your gem's dependencies in best_companies.gemspec
+
 gemspec
