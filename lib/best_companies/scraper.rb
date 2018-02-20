@@ -14,6 +14,7 @@ class BestCompanies::Scraper
    review_url = company.css(".review-link").attr("href").value
    scraped_companies << {:rank => rank, :year => year, :name => name, :industry => industry, :location => location, :review_url => review_url}
   end
+  scraped_companies
  end
 
  def self.scrape_ratings(url)
