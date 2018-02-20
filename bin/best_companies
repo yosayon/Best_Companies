@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative '../lib/best_companies.rb'
+
+BestCompanies::CLI.start
