@@ -137,13 +137,13 @@ class BestCompanies::CLI
   puts "Location:".colorize(:red) + " #{company.location}"
   puts "Review_URL:".colorize(:red) + " #{company.review_url}"
   if company.challenges != nil
-   puts "Ratings:".colorize(:red)
-   puts " Challenges:" + " #{company.challenges}"
-   puts " Atmosphere:". + " #{company.atmosphere}"
-   puts " Rewards:" + " #{company.rewards}"
-   puts " Pride:" + " #{company.pride}"
-   puts " Communication:" + " #{company.communication}"
-   puts " Bosses:" + " #{company.bosses}"
+   puts " Employee Ratings:".colorize(:red)
+   puts " Great Challenges:" + " #{company.challenges}"
+   puts " Great Atmosphere:". + " #{company.atmosphere}"
+   puts " Great Rewards:" + " #{company.rewards}"
+   puts " Great Pride:" + " #{company.pride}"
+   puts " Great Communication:" + " #{company.communication}"
+   puts " Great Bosses:" + " #{company.bosses}"
    puts "Awards:".colorize(:red)
    company.awards.each{|award|puts " #{award}"}
    puts "------------------------------------------------"
