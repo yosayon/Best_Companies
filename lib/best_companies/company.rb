@@ -59,5 +59,5 @@ class BestCompanies::Company
    puts "------------------------------------------------"
    self.all.slice(num1..num2).each{|company|BestCompanies::CLI.see_company(company)}
   end
- 
+  
 end

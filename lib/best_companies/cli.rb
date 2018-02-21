@@ -92,7 +92,7 @@ class BestCompanies::CLI
      self.see_company(BestCompanies::Company.all[(input.to_i)-1])
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
-    else
+   else
      self.add_ratings_and_awards(input)
    end
   elsif input.match(/[A-Za-z]/)
