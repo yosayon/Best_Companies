@@ -36,13 +36,13 @@ class BestCompanies::CLI
  end
  
  def self.ask_user
-  puts "To see the entire list of Best Companies please type ".colorize(:light_blue) + "see list".colorize(:red)
-  puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format. ".colorize(:light_blue) + "For Ex: 15-20".colorize(:red)
-  puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'".colorize(:red)
-  puts "To view best companies by state or industry, type ".colorize(:light_blue) + "see states".colorize(:red) + " or ".colorize(:light_blue) + "see industries".colorize(:red)
-  puts "To view your saved companies, type ".colorize(:light_blue) + "archive".colorize(:red)
-  puts "To switch years please type ".colorize(:light_blue) + "2017 or 2018".colorize(:red)
-  puts "To exit type ".colorize(:light_blue) + "exit".colorize(:red)
+  puts "To see the entire list of Best Companies please type ".colorize(:light_blue) + "see list"
+  puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format. ".colorize(:light_blue) + "For Ex: 15-20"
+  puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'"
+  puts "To view best companies by state or industry, type ".colorize(:light_blue) + "see states" + " or ".colorize(:light_blue) + "see industries"
+  puts "To view your saved companies, type ".colorize(:light_blue) + "archive"
+  puts "To switch years please type ".colorize(:light_blue) + "2017 or 2018"
+  puts "To exit type ".colorize(:light_blue) + "exit"
   puts "------------------------------------------------"
   
   input = gets.strip.to_s
