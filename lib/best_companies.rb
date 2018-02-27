@@ -1,4 +1,4 @@
-#require "best_companies/version"
+require "best_companies/version"
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
@@ -6,9 +6,9 @@ require 'colorize'
 require 'colorized_string'
 require 'faraday'
 
- module BestCompanies
+ #module BestCompanies
   # Your code goes here...
- end
+#end
 
 require_relative '../lib/best_companies/concerns/findable'
 require_relative '../lib/best_companies/concerns/nameable'
