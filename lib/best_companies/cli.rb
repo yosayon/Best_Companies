@@ -1,7 +1,12 @@
 class BestCompanies::CLI
  BASE_PATH = "https://www.greatplacetowork.com/best-workplaces/100-best/"
+ 
+ def call
+  puts "loading your environment..."
+  start
+ end
     
- def self.start
+ def start
   puts "\nWelcome!".bold
   puts "Do you want to view the 2017 or 2018 Fortune list? Type the year."
   year = gets.strip
@@ -9,33 +14,33 @@ class BestCompanies::CLI
    create_list(year)
    ask_user
   else
-   self.reject_input
-   self.start
+   reject_input
+   start
   end
  end
  
- def self.switch_year(year)
+ def switch_year(year)
   if year == "2017"
    BestCompanies::Company.all.clear
    BestCompanies::Industry.all.clear
    BestCompanies::State.all.clear
-   self.create_list("2017")
-   self.ask_user
+    create_list("2017")
+    ask_user
   else
    BestCompanies::Company.all.clear
    BestCompanies::Industry.all.clear
    BestCompanies::State.all.clear
-   self.create_list("2018")
-   self.ask_user
+    create_list("2018")
+    ask_user
   end
  end
  
- def self.create_list(year)
+ def create_list(year)
   company_hash = BestCompanies::Scraper.scrape_companies(BASE_PATH + year, year)
   BestCompanies::Company.create_from_list(company_hash)
  end
  
- def self.ask_user
+ def ask_user
   puts "To see the entire list of Best Companies please type ".colorize(:light_blue) + "see list"
   puts "To enter in a custom range of Best Companies between 1-100, type the range in number-number format. ".colorize(:light_blue) + "For Ex: 15-20"
   puts "To view the ratings and awards for a company, enter the company rank (1-100) ".colorize(:light_blue) + "For Ex: 'rank 5'"
@@ -73,7 +78,7 @@ class BestCompanies::CLI
   end
  end
  
- def self.validate_input(input)
+ def validate_input(input)
   if input.match(/\d{1,}\-\d{1}/)
    input = input.split("-")
    num1 = (input[0].to_i)
@@ -83,7 +88,7 @@ class BestCompanies::CLI
     num2 = num2 - 1
     BestCompanies::Company.list_all(num1,num2)
    else
-    self.reject_input
+    reject_input
    end
   elsif input.match(/(rank)\s\d{1,}/) 
    input = input.split(" ")[1]
@@ -93,7 +98,7 @@ class BestCompanies::CLI
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
    else
-     self.add_ratings_and_awards(input)
+     self.class.add_ratings_and_awards(input)
    end
   elsif input.match(/[A-Za-z]/)
    if BestCompanies::State.all.detect{|state|state.name == input} != nil
@@ -101,18 +106,18 @@ class BestCompanies::CLI
    elsif BestCompanies::Industry.all.detect{|industry|industry.name == input} != nil
     BestCompanies::Industry.all.detect{|industry|industry.name == input}.companies.each{|company|see_company(company)}
    else
-    self.reject_input
+    reject_input
    end
   else
-   self.reject_input
+   reject_input
   end
  end
  
- def self.reject_input
+ def reject_input
   puts "Your input was rejected. Please type in a valid input.".colorize(:red)
  end
  
- def self.get_input
+ def get_input
   puts "------------------------------------------------"
   puts "Please enter in the number to view companies by state/industry.".colorize(:light_blue)
   puts "To go back to the main menu, type ".colorize(:light_blue) + "menu".colorize(:red)
@@ -124,7 +129,7 @@ class BestCompanies::CLI
   validated_input = BestCompanies::Company.all.detect{|c|c.rank == input}
   validated_input.add_ratings(BestCompanies::Scraper.scrape_ratings(validated_input.review_url))
   validated_input.add_awards(BestCompanies::Scraper.scrape_awards(validated_input.review_url))
-  self.see_company(validated_input)
+  see_company(validated_input)
   BestCompanies::Company.all[(input.to_i)-1].save?
   puts "------------------------------------------------"
  end
