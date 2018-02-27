@@ -6,10 +6,6 @@ require 'colorize'
 require 'colorized_string'
 require 'faraday'
 
- #module BestCompanies
-  # Your code goes here...
-#end
-
 require_relative '../lib/best_companies/concerns/findable'
 require_relative '../lib/best_companies/concerns/nameable'
 require_relative '../lib/best_companies/concerns/persistable'
