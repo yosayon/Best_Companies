@@ -6,9 +6,9 @@ require 'colorize'
 require 'colorized_string'
 require 'faraday'
 
-module BestCompanies
+ module BestCompanies
   # Your code goes here...
-end
+ end
 
 require_relative '../lib/best_companies/concerns/findable'
 require_relative '../lib/best_companies/concerns/nameable'
@@ -18,8 +18,3 @@ require_relative '../lib/best_companies/industry'
 require_relative '../lib/best_companies/company'
 require_relative '../lib/best_companies/scraper'
 require_relative '../lib/best_companies/state'
-
-
-puts "loading your environment..."
-
-BestCompanies::CLI.start
