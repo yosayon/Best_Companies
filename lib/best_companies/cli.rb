@@ -57,10 +57,10 @@ class BestCompanies::CLI
    BestCompanies::Company.list_all(0,99)
   when "see states"
    BestCompanies::State.list
-   BestCompanies::State.check_input(self.get_input)
+   BestCompanies::State.check_input(self.class.get_input)
   when "see industries"
    BestCompanies::Industry.list
-   BestCompanies::Industry.check_input(self.get_input)
+   BestCompanies::Industry.check_input(self.class.get_input)
   when "archive"
    BestCompanies::Company.archive
   when "2017"
@@ -70,7 +70,7 @@ class BestCompanies::CLI
   when "exit"
    exit
   else
-   self.validate_input(input)
+   validate_input(input)
   end
   
   while input != "exit"
@@ -88,13 +88,13 @@ class BestCompanies::CLI
     num2 = num2 - 1
     BestCompanies::Company.list_all(num1,num2)
    else
-    reject_input
+    self.class.reject_input
    end
   elsif input.match(/(rank)\s\d{1,}/) 
    input = input.split(" ")[1]
    if input.to_i.between?(1,100) && Faraday.get(BestCompanies::Company.all[(input.to_i)-1].review_url).status == 404
      puts "This company does not have a published review".colorize(:light_blue)
-     self.see_company(BestCompanies::Company.all[(input.to_i)-1])
+     self.class.see_company(BestCompanies::Company.all[(input.to_i)-1])
      BestCompanies::Company.all[(input.to_i)-1].save?
      puts "------------------------------------------------"
    else
@@ -102,22 +102,22 @@ class BestCompanies::CLI
    end
   elsif input.match(/[A-Za-z]/)
    if BestCompanies::State.all.detect{|state|state.name == input} != nil
-    BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|see_company(company)}
+    BestCompanies::State.all.detect{|state|state.name == input}.companies.each{|company|self.class.see_company(company)}
    elsif BestCompanies::Industry.all.detect{|industry|industry.name == input} != nil
-    BestCompanies::Industry.all.detect{|industry|industry.name == input}.companies.each{|company|see_company(company)}
+    BestCompanies::Industry.all.detect{|industry|industry.name == input}.companies.each{|company|self.class.see_company(company)}
    else
-    reject_input
+    self.class.reject_input
    end
   else
-   reject_input
+   self.class.reject_input
   end
  end
  
- def reject_input
+ def self.reject_input
   puts "Your input was rejected. Please type in a valid input.".colorize(:red)
  end
  
- def get_input
+ def self.get_input
   puts "------------------------------------------------"
   puts "Please enter in the number to view companies by state/industry.".colorize(:light_blue)
   puts "To go back to the main menu, type ".colorize(:light_blue) + "menu".colorize(:red)
